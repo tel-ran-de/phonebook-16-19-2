@@ -1,4 +1,4 @@
 # Phonebook Group 2
 
-## Dewelopers:
+## Developers:
 Juergen
