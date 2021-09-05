@@ -2,5 +2,7 @@
 
 ## Developers:
 Juergen
+
 Anastasia
+
 Natalya
