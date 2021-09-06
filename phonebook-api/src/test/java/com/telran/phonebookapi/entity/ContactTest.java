@@ -1,6 +1,9 @@
 package com.telran.phonebookapi.entity;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.web.server.MethodNotAllowedException;
+
+import javax.el.MethodNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,12 +23,12 @@ public class ContactTest {
         assertThrows(NullPointerException.class, () -> new Contact("fName", null, 18, true, Group.Family));
         assertThrows(NullPointerException.class, () -> new Contact("fName", "lName", 18, true, null));
         assertThrows(NullPointerException.class, () -> new Contact(null, null, 18, true, null));
-
     }
 
     @Test
     public void gettersAndSettersContactTest() {
         contact = new Contact("fName", "lName", 18, true, Group.Family);
+
         assertEquals("fName", contact.getFirsName());
         contact.setFirsName("Vania");
         assertEquals("Vania", contact.getFirsName());

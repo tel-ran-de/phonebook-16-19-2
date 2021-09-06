@@ -22,7 +22,6 @@ public class Contact {
     private int age;
     @Setter
     private boolean isFavorite;
-    // TODO: 06.09.2021
     @Enumerated(EnumType.STRING)
     @Column(name = "contact_group")
     @Setter

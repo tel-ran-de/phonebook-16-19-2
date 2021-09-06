@@ -20,7 +20,7 @@ public class Email {
     @ManyToOne
     private Contact contact;
 
-    public Email(@NonNull String email,boolean isFavorite, @NonNull Contact contact) {
+    public Email(@NonNull String email, boolean isFavorite, @NonNull Contact contact) {
         this.email = email;
         this.isFavorite = isFavorite;
         this.contact = contact;

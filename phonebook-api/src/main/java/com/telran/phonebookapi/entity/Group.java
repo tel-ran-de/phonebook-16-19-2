@@ -4,5 +4,4 @@ public enum Group {
     Family,
     Friends,
     None
-
 }
