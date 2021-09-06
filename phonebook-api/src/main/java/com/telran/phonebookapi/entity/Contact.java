@@ -3,6 +3,7 @@ package com.telran.phonebookapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +25,7 @@ public class Contact {
     // TODO: 06.09.2021
     @Enumerated(EnumType.STRING)
     @Column(name = "contact_group")
+    @Setter
     private Group group;
 
     @OneToMany(mappedBy = "contact")
@@ -39,6 +41,9 @@ public class Contact {
         this.age = age;
         this.isFavorite = isFavorite;
         this.group = group;
+        phones = new ArrayList<>();
+        addresses = new ArrayList<>();
+        emails = new ArrayList<>();
     }
 
     public void addAddress(@NonNull Address address) {
