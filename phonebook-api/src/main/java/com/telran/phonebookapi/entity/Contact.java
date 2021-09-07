@@ -27,11 +27,11 @@ public class Contact {
     @Setter
     private Group group;
 
-    @OneToMany(mappedBy = "contact")
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     private List<Phone> phones;
-    @OneToMany(mappedBy = "contact")
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     private List<Address> addresses;
-    @OneToMany(mappedBy = "contact")
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     private List<Email> emails;
 
     public Contact(@NonNull String firsName, @NonNull String lastName, int age, boolean isFavorite, @NonNull Group group) {

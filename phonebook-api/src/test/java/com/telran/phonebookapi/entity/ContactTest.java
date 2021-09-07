@@ -1,33 +1,29 @@
 package com.telran.phonebookapi.entity;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.web.server.MethodNotAllowedException;
-
-import javax.el.MethodNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ContactTest {
-    Contact contact;
 
     @Test
     public void createContactTest() {
-        contact = new Contact("fName", "lName", 18, true, Group.Family);
+        Contact contact = new Contact("fName", "lName", 18, true, Group.FAMILY);
         assertNotNull(contact);
     }
 
     @Test
     public void exceptionContactTest() {
-        assertThrows(NullPointerException.class, () -> new Contact(null, "lName", 18, true, Group.Family));
-        assertThrows(NullPointerException.class, () -> new Contact("fName", null, 18, true, Group.Family));
+        assertThrows(NullPointerException.class, () -> new Contact(null, "lName", 18, true, Group.FAMILY));
+        assertThrows(NullPointerException.class, () -> new Contact("fName", null, 18, true, Group.FAMILY));
         assertThrows(NullPointerException.class, () -> new Contact("fName", "lName", 18, true, null));
         assertThrows(NullPointerException.class, () -> new Contact(null, null, 18, true, null));
     }
 
     @Test
     public void gettersAndSettersContactTest() {
-        contact = new Contact("fName", "lName", 18, true, Group.Family);
+        Contact contact = new Contact("fName", "lName", 18, true, Group.FAMILY);
 
         assertEquals("fName", contact.getFirsName());
         contact.setFirsName("Vania");
@@ -45,15 +41,14 @@ public class ContactTest {
         contact.setFavorite(false);
         assertFalse(contact.isFavorite());
 
-        assertEquals(Group.Family, contact.getGroup());
-        contact.setGroup(Group.Friends);
-        assertEquals(Group.Friends, contact.getGroup());
+        assertEquals(Group.FAMILY, contact.getGroup());
+        contact.setGroup(Group.FRIENDS);
+        assertEquals(Group.FRIENDS, contact.getGroup());
     }
 
     @Test
     public void methodsContactTest() {
-        contact = new Contact("fName", "lName", 18, true, Group.Family);
-
+        Contact contact = new Contact("fName", "lName", 18, true, Group.FAMILY);
 
         assertEquals(0, contact.getAddresses().size());
         contact.addAddress(new Address());
@@ -66,6 +61,5 @@ public class ContactTest {
         assertEquals(0, contact.getPhones().size());
         contact.addPhone(new Phone());
         assertEquals(1, contact.getPhones().size());
-
     }
 }
