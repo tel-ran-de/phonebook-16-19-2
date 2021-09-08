@@ -28,7 +28,7 @@ public class Contact {
     private Group group;
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private List<Phone> phones = new ArrayList<>(); // to avoid null pointer exception when creating entity via default constructor and adding new phone
+    private List<Phone> phones = new ArrayList<>();
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     private List<Address> addresses = new ArrayList<>();
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
@@ -40,9 +40,6 @@ public class Contact {
         this.age = age;
         this.isFavorite = isFavorite;
         this.group = group;
-//        phones = new ArrayList<>();
-//        addresses = new ArrayList<>();
-//        emails = new ArrayList<>();
     }
 
     public void addAddress(@NonNull Address address) {
