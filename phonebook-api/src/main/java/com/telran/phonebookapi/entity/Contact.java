@@ -15,7 +15,7 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Setter
-    private String firsName;
+    private String firstName;
     @Setter
     private String lastName;
     @Setter
@@ -28,21 +28,21 @@ public class Contact {
     private Group group;
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private List<Phone> phones;
+    private List<Phone> phones = new ArrayList<>(); // to avoid null pointer exception when creating entity via default constructor and adding new phone
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private List<Address> addresses;
+    private List<Address> addresses = new ArrayList<>();
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private List<Email> emails;
+    private List<Email> emails = new ArrayList<>();
 
-    public Contact(@NonNull String firsName, @NonNull String lastName, int age, boolean isFavorite, @NonNull Group group) {
-        this.firsName = firsName;
+    public Contact(@NonNull String firstName, @NonNull String lastName, int age, boolean isFavorite, @NonNull Group group) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.isFavorite = isFavorite;
         this.group = group;
-        phones = new ArrayList<>();
-        addresses = new ArrayList<>();
-        emails = new ArrayList<>();
+//        phones = new ArrayList<>();
+//        addresses = new ArrayList<>();
+//        emails = new ArrayList<>();
     }
 
     public void addAddress(@NonNull Address address) {
@@ -62,12 +62,12 @@ public class Contact {
         if (this == o) return true;
         if (!(o instanceof Contact)) return false;
         Contact contact = (Contact) o;
-        return age == contact.age && Objects.equals(id, contact.id) && Objects.equals(firsName, contact.firsName) && Objects.equals(lastName, contact.lastName);
+        return age == contact.age && Objects.equals(id, contact.id) && Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firsName, lastName, age);
+        return Objects.hash(id, firstName, lastName, age);
     }
 }
 
