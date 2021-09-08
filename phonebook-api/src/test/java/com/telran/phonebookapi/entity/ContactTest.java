@@ -1,23 +1,8 @@
 package com.telran.phonebookapi.entity;
 
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-
-
-public class ContactTest {
-    Contact contact;
-    private static Group group;
-
-    @Test
-    public void createContactTest() {
-        Contact contact = new Contact("fName", "lName", 18, true, group.Family);
-=======
 
 import static org.junit.jupiter.api.Assertions.*;
-
 
 public class ContactTest {
 
@@ -75,6 +60,5 @@ public class ContactTest {
         assertEquals(0, contact.getPhones().size());
         contact.addPhone(new Phone());
         assertEquals(1, contact.getPhones().size());
->>>>>>> 4beaaafc2bc5f3938282885b3409b6e90c46ed9b
     }
 }

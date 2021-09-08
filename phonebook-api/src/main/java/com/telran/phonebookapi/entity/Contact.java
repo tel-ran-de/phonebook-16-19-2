@@ -3,10 +3,7 @@ package com.telran.phonebookapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> 4beaaafc2bc5f3938282885b3409b6e90c46ed9b
 import java.util.List;
 import java.util.Objects;
 
@@ -25,18 +22,7 @@ public class Contact {
     private int age;
     @Setter
     private boolean isFavorite;
-<<<<<<< HEAD
-    // TODO: 06.09.2021
-    @Enumerated(EnumType.STRING)
-    @Column(name = "contact_group")
-    private Group group;
 
-    @OneToMany(mappedBy = "contact")
-    private List<Phone> phones;
-    @OneToMany(mappedBy = "contact")
-    private List<Address> addresses;
-    @OneToMany(mappedBy = "contact")
-=======
     @Enumerated(EnumType.STRING)
     @Column(name = "contact_group")
     @Setter
@@ -47,7 +33,7 @@ public class Contact {
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     private List<Address> addresses;
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
->>>>>>> 4beaaafc2bc5f3938282885b3409b6e90c46ed9b
+
     private List<Email> emails;
 
     public Contact(@NonNull String firsName, @NonNull String lastName, int age, boolean isFavorite, @NonNull Group group) {
@@ -56,12 +42,11 @@ public class Contact {
         this.age = age;
         this.isFavorite = isFavorite;
         this.group = group;
-<<<<<<< HEAD
-=======
+
         phones = new ArrayList<>();
         addresses = new ArrayList<>();
         emails = new ArrayList<>();
->>>>>>> 4beaaafc2bc5f3938282885b3409b6e90c46ed9b
+
     }
 
     public void addAddress(@NonNull Address address) {
