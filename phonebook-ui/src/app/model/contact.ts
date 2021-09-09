@@ -4,8 +4,5 @@ export interface Contact {
   lastName: string,
   age: number,
   isFavorite: boolean,
-  group: string,
-  phones: [],
-  addresses: [],
-  emails: []
+  group: string
 }

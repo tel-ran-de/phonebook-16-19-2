@@ -14,50 +14,35 @@ export class InMemoryDataService implements InMemoryDbService {
         lastName: "lastName",
         age: 18,
         isFavorite: true,
-        group: "FRIENDS",
-        phones: [],
-        addresses: [],
-        emails: []
+        group: "FRIENDS"
       }, {
         id: 2,
         firsName: "Benjamin",
         lastName: "Top",
         age: 77,
         isFavorite: false,
-        group: "FAMILY",
-        phones: [],
-        addresses: [],
-        emails: []
+        group: "FAMILY"
       }, {
         id: 3,
         firsName: "Vovka",
         lastName: "Bulkin",
         age: 12,
         isFavorite: true,
-        group: "FRIENDS",
-        phones: [],
-        addresses: [],
-        emails: []
+        group: "FRIENDS"
       }, {
         id: 4,
         firsName: "Nick",
         lastName: "Dulitl",
         age: 56,
         isFavorite: true,
-        group: "NONE",
-        phones: [],
-        addresses: [],
-        emails: []
+        group: "NONE"
       }, {
         id: 5,
         firsName: "Otto",
         lastName: "Skin",
         age: 32,
         isFavorite: false,
-        group: "FRIENDS",
-        phones: [],
-        addresses: [],
-        emails: []
+        group: "FRIENDS"
       }
     ];
     return {contacts};
