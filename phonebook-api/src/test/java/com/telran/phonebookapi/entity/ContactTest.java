@@ -25,9 +25,9 @@ public class ContactTest {
     public void gettersAndSettersContactTest() {
         Contact contact = new Contact("fName", "lName", 18, true, Group.FAMILY);
 
-        assertEquals("fName", contact.getFirsName());
-        contact.setFirsName("Vania");
-        assertEquals("Vania", contact.getFirsName());
+        assertEquals("fName", contact.getFirstName());
+        contact.setFirstName("Vania");
+        assertEquals("Vania", contact.getFirstName());
 
         assertEquals("lName", contact.getLastName());
         contact.setLastName("Ivanov");
