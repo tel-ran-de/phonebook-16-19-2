@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {InMemoryDbService} from 'angular-in-memory-web-api';
-import {Contact} from "./contact";
+import {Contact} from "./model/contact";
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,47 @@ export class InMemoryDataService implements InMemoryDbService {
         phones: [],
         addresses: [],
         emails: []
-      },
-
+      }, {
+        id: 2,
+        firsName: "Benjamin",
+        lastName: "Top",
+        age: 77,
+        isFavorite: false,
+        group: "FAMILY",
+        phones: [],
+        addresses: [],
+        emails: []
+      }, {
+        id: 3,
+        firsName: "Vovka",
+        lastName: "Bulkin",
+        age: 12,
+        isFavorite: true,
+        group: "FRIENDS",
+        phones: [],
+        addresses: [],
+        emails: []
+      }, {
+        id: 4,
+        firsName: "Nick",
+        lastName: "Dulitl",
+        age: 56,
+        isFavorite: true,
+        group: "NONE",
+        phones: [],
+        addresses: [],
+        emails: []
+      }, {
+        id: 5,
+        firsName: "Otto",
+        lastName: "Skin",
+        age: 32,
+        isFavorite: false,
+        group: "FRIENDS",
+        phones: [],
+        addresses: [],
+        emails: []
+      }
     ];
     return {contacts};
   }
