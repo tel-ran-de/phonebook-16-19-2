@@ -1,9 +1,12 @@
 package com.telran.phonebookapi.service;
 
 import com.telran.phonebookapi.entity.Contact;
-import com.telran.phonebookapi.exception.ContactException;
+import com.telran.phonebookapi.entity.Group;
+import com.telran.phonebookapi.exception.ContactNotFoundException;
 import com.telran.phonebookapi.repository.ContactRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -14,20 +17,35 @@ public class ContactService {
         this.contactRepository = contactRepository;
     }
 
-    public Contact add(Contact contact) {
-        return contactRepository.save(contact);
+    public Contact add(String fName, String lName, int age, boolean isFavourite, Group group) {
+        return contactRepository.save(new Contact(fName, lName, age, isFavourite, group));
     }
 
     public Contact get(Long id) {
        return contactRepository.findById(id)
-                .orElseThrow(() -> new ContactException("Contact with id " + id + " doesn't exist"));
+                .orElseThrow(() -> new ContactNotFoundException("Contact with id " + id + " doesn't exist"));
     }
 
     public void remove (Long id) {
+        contactRepository.findById(id)
+                .orElseThrow(() -> new ContactNotFoundException("Contact with id " + id + " doesn't exist"));
         contactRepository.deleteById(id);
     }
 
     public Iterable<Contact> getAll() {
         return contactRepository.findAll();
+    }
+
+    public void editContact(Long id, String fName, String lName, int age, boolean isFavourite, Group group) {
+        Contact contact = contactRepository.findById(id).
+                orElseThrow(() -> new ContactNotFoundException("Contact with id " + id + " doesn't exist"));
+        if(fName != null)
+            contact.setFirstName(fName);
+        if(lName != null)
+        contact.setLastName(lName);
+        contact.setAge(age);
+        contact.setFavorite(isFavourite);
+        contact.setGroup(group);
+        contactRepository.save(contact);
     }
 }
