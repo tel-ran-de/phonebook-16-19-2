@@ -17,9 +17,8 @@ public class PhoneService {
         this.contactRepository = contactRepository;
     }
 
-    public Phone add(String countryCode, String telephoneNumber, boolean isFavorite, Contact contact) {
-        Long contactId = contact.getId();
-        contactRepository.findById(contactId)
+    public Phone add(String countryCode, String telephoneNumber, boolean isFavorite, Long contactId) {
+        Contact contact = contactRepository.findById(contactId)
                 .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " doesn't exist"));
         Phone phone = new Phone(countryCode, telephoneNumber, isFavorite, contact);
         contact.addPhone(phone);
@@ -37,8 +36,10 @@ public class PhoneService {
         phoneRepository.deleteById(id);
     }
 
-    public Iterable<Phone> getAll() {
-        return phoneRepository.findAll();
+    public Iterable<Phone> getAll(Long contactId) {
+        Contact contact = contactRepository.findById(contactId)
+                .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " doesn't exist"));
+        return contact.getPhones();
     }
 
     public void edit(Long id, String countryCode, String telephoneNumber, boolean isFavorite) {
@@ -49,10 +50,7 @@ public class PhoneService {
         if (telephoneNumber != null)
             phone.setTelephoneNumber(telephoneNumber);
         phone.setFavorite(isFavorite);
+        phoneRepository.save(phone);
     }
 
-    public Contact getContactByPhoneId(Long id) {
-        Phone phone = phoneRepository.findById(id).orElseThrow(() -> new PhoneNotFoundException("Phone with id: " + id + " not found"));
-        return phone.getContact();
-    }
 }
