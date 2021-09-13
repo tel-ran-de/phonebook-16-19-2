@@ -84,11 +84,6 @@ public class PhoneServiceTest {
 
     @Test
     public void deletePhoneByIdNegative() {
-        try {
-            doThrow(new PhoneNotFoundException("Phone with id: 123 not found")).when(phoneService).remove(123L);
-            verify(phoneService).remove(123L);
-        } catch (Exception ignored) {
-        }
         Exception exception = assertThrows(PhoneNotFoundException.class, () -> phoneService.get(123L));
         assertNotNull(exception);
         assertEquals("Phone with id: 123 not found", exception.getMessage());
