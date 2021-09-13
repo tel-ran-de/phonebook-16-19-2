@@ -1,0 +1,8 @@
+.edit-picture img, .edit-picture-phone img {
+  width: 22px;
+}
+.container {
+  width: 70%;
+  background-color: #FBF7F0;
+  padding-bottom: 35px;
+}

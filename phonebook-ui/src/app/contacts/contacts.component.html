@@ -1,0 +1,42 @@
+<input type="search" id="search" placeholder="Search">
+
+<div class="container">
+  <div class="row contact-row ">
+    <div class="contact col-md-3 col-sm-12 ">
+      <div (click)="goToPage('contact-details')" *ngIf="contact" class="contact-name">
+        <div>{{contact.firstName}}  {{contact.lastName}}</div>
+        <div *ngIf="phone">{{phone.countryCode}}  {{phone.telephoneNumber}}</div>
+        <div *ngIf="email">{{email.email}}</div>
+      </div>
+    </div>
+    <div (click)="goToPage('contact-details')" *ngIf="contact" class="contact col-md-3 col-sm-12 ">
+      <div>{{contact.firstName}}  {{contact.lastName}}</div>
+      <div *ngIf="phone">{{phone.countryCode}}  {{phone.telephoneNumber}}</div>
+      <div *ngIf="email">{{email.email}}</div>
+
+    </div>
+    <div (click)="goToPage('contact-details')" *ngIf="contact" class="contact col-md-3 col-sm-12 ">
+      <div>{{contact.firstName}}  {{contact.lastName}}</div>
+      <div *ngIf="phone">{{phone.countryCode}}  {{phone.telephoneNumber}}</div>
+      <div *ngIf="email">{{email.email}}</div>
+    </div>
+  </div>
+
+  <div class="row contact-row">
+    <div  (click)="goToPage('contact-details')"   class="contact col-md-3 col-sm-12 ">
+      <div *ngIf="contact" class="contact-name">
+        <div>{{contact.firstName}}  {{contact.lastName}}</div>
+        <div *ngIf="phone">{{phone.countryCode}}  {{phone.telephoneNumber}}</div>
+      </div>
+    </div>
+    <div (click)="goToPage('contact-details')" *ngIf="contact" class="contact col-md-3 col-sm-12 ">
+      <div>{{contact.firstName}}  {{contact.lastName}}</div>
+      <div *ngIf="phone">{{phone.countryCode}}  {{phone.telephoneNumber}}</div>
+    </div>
+    <div (click)="goToPage('contact-details')" *ngIf="contact" class="contact col-md-3 col-sm-12 ">
+      <div></div>
+      <div *ngIf="phone"></div>
+    </div>
+  </div>
+</div>
+

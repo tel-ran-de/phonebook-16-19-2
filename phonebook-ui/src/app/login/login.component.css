@@ -1,0 +1,73 @@
+.form-signin {
+  width: 100%;
+  max-width: 430px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  border-radius: 6px;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.tel img{
+  width: 160px;
+}
+.tel {
+  text-align-last: center;
+}
+.tel-title {
+  font-size: 50px;
+  text-align: center;
+}
+
+.login-btn {
+  filter: drop-shadow(0px 9px 35px rgba(23, 59, 53, 0.49));
+  background: linear-gradient(99.19deg, rgba(33, 84, 75, 0.78) 17.89%, #000000 79.07%);
+  border-radius: 30px;
+  font-size: 24px;
+  width: 200px;
+  line-height: 30px;
+  color: #CFD2BF;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .tel-title {
+    font-size: 30px;
+  }
+  .login-btn {
+    font-size: 18px;
+  }
+  .tel img{
+    width: 140px;
+  }
+
+  @media (max-width: 575px) {
+    .tel-title {
+      font-size: 20px;
+    }
+    .login-btn {
+      font-size: 14px;
+      width: 140px;
+    }
+    .tel img{
+      width: 120px;
+    }
+  }
+}
+

@@ -1,0 +1,52 @@
+.container {
+  background-color: white;
+}
+.contact {
+  background-color: rgba(33, 84, 75, 0.58);
+  margin: 10px;
+  color: #ffffff;
+  border-radius: 5px;
+}
+.contact-row {
+  justify-content: center;
+}
+#search {
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #FBF7F0;
+
+}
+.container {
+  width: 70%;
+  background-color: #FBF7F0;
+  border-radius: 8px;
+}
+
+@media (max-width: 767px) {
+  div {
+    font-size: 14px;
+  }
+  .container {
+    padding: 0 25px;
+  }
+  .contact {
+    margin: 15px 0 0 0;
+  }
+}
+
+@media (max-width: 575px) {
+  div {
+    font-size: 12px;
+  }
+  .container {
+    padding: 0 25px;
+  }
+  .contact {
+    margin: 15px 0 0 0;
+  }
+  #search {
+    width: 60%;
+  }
+}

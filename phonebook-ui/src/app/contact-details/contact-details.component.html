@@ -1,0 +1,215 @@
+<div class="container contact">
+  <div class="row contact-title">Contact</div>
+
+  <form class="row ">
+    <div class="col-md-2">
+      <label>Icon</label>
+      <div class="col-md-2 col-sm-6 edit-picture-phone">
+        <img src="assets/images/icon.png">
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 form-group">
+      <label>First Name</label>
+      <input [readonly]="!contactEditFlag" class="col-md-4 col-sm-12 form-control" [value]="contact?.firstName">
+    </div>
+
+    <div class="col-md-4 col-sm-4 form-group">
+      <label>Last Name</label>
+      <input [readonly]="!contactEditFlag" class="col-md-4 col-sm-12 form-control" [value]="contact?.lastName">
+    </div>
+    <div class="col-md-2 col-sm-4 edit-picture"><img (click)="toggleEditContact()" class="" src="assets/images/edit.png"> </div>
+  </form>
+</div>
+
+<div class="container phone">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Phone  </div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+
+  <form class="row ">
+    <div class="col-md-1">
+        <div class="col-md-1 edit-picture-phone phone-img"><img class="" src="assets/images/phone.png"> </div>
+    </div>
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class="col-md-1 col-sm-1 "><div (click)="toggleStar()"  class="star star-{{phone?.isFavorite }}" ></div></div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-4 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-2 col-sm-2 form-control" [value]="phone?.countryCode">
+    </div>
+    <div class="col-md-5 col-sm-4 col-6 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-2 form-control" [value]="phone?.telephoneNumber">
+    </div>
+    <div class="col-md-3 col-sm-5 col-12 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+    <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+
+  <form class="row ">
+    <div class="col-md-1">
+      <div class="col-md-1 edit-picture-phone phone-img"><img class="" src="assets/images/phone.png"> </div>
+    </div>
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class="col-md-1 col-sm-1 "><div (click)="toggleStar()"  class="star star-{{phone2?.isFavorite }}" ></div></div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-4 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-2 col-sm-2 form-control" [value]="phone2?.countryCode">
+    </div>
+    <div class="col-md-5 col-sm-4 col-6 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-2 form-control" [value]="phone2?.telephoneNumber">
+    </div>
+    <div class="col-md-3 col-sm-5 col-12 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+</div>
+
+<div class="container email">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Email</div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+  <form class="row ">
+    <div class="col-md-1  form-group">
+    </div>
+    <div class="col-md-1 col-sm-2 col-2">
+      <div class=""><div (click)="toggleStar()"  class="star star-{{email?.isFavorite }}" ></div></div>
+    </div>
+
+    <div class="col-md-7 col-sm-6 col-6 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="email?.email">
+    </div>
+    <div class="col-md-3 col-sm-5 col-5 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+</div>
+
+<div class="container address">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Address</div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+  <form class="row ">
+    <div class="col-md-1 col-sm-0 col-0 form-group">
+    </div>
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class=""><div (click)="toggleStar()"  class="star star-{{address?.isFavorite }}" ></div></div>
+    </div>
+
+    <div class="col-md-2 col-sm-5 col-5 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.country">
+    </div>
+    <div class="col-md-2 col-sm-5 col-5 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.city">
+    </div>
+    <div class="col-md-2 col-sm-4 col-8 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.street">
+    </div>
+    <div class="col-md-2 col-sm-4 col-4 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.homeNr">
+    </div>
+    <div class="col-md-2 col-sm-4 col-12 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+</div>
+
+<hr style="height: 5px">
+
+<div class="container contact">
+  <div class="row contact-title">Contact</div>
+
+  <form class="row ">
+    <div class="col-md-2 icon">
+      <label>Icon</label>
+      <div class="col-md-2 col-sm-4 edit-picture-phone">
+        <img src="assets/images/icon.png">
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-6 form-group">
+      <label>First Name</label>
+      <input [readonly]="!contactEditFlag" class="form-control" [value]="contact?.firstName">
+    </div>
+
+    <div class="col-md-3 col-sm-3 col-6 form-group">
+      <label>Last Name</label>
+      <input [readonly]="!contactEditFlag" class="form-control" [value]="contact?.lastName">
+
+    </div>
+    <div class="col-sm-1 col-md-1 edit-picture"><img (click)="toggleEditContact()" class="" src="assets/images/edit.png"> </div>
+  </form>
+</div>
+<div class="container phone">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Phone  </div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+
+  <form class="row ">
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class="col-md-1 col-sm-1 "><div (click)="toggleStar()"  class="star star-{{phone?.isFavorite }}" ></div></div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-4 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-2 col-sm-2 form-control" [value]="phone?.countryCode">
+    </div>
+    <div class="col-md-5 col-sm-4 col-6 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-2 form-control" [value]="phone?.telephoneNumber">
+    </div>
+    <div class="col-md-3 col-sm-5 col-12 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+
+  <form class="row ">
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class="col-md-1 col-sm-1 "><div (click)="toggleStar()"  class="star star-{{phone2?.isFavorite }}" ></div></div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-4 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-2 col-sm-2 form-control" [value]="phone2?.countryCode">
+    </div>
+    <div class="col-md-5 col-sm-4 col-6 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-2 form-control" [value]="phone2?.telephoneNumber">
+    </div>
+    <div class="col-md-3 col-sm-5 col-12 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+</div>
+
+<div class="container email">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Email</div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+  <form class="row ">
+    <div class="col-md-1 col-sm-2 col-1">
+      <div class=""><div (click)="toggleStar()"  class="star star-{{email?.isFavorite }}" ></div></div>
+    </div>
+
+    <div class="col-md-7 col-sm-6 col-10 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="email?.email">
+    </div>
+    <div class="col-md-3 col-sm-5 col-6 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+</div>
+
+<div class="container address">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Address</div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+  <form class="row ">
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class=""><div (click)="toggleStar()"  class="star star-{{address?.isFavorite }}" ></div></div>
+    </div>
+
+    <div class="col-md-4 col-sm-5 col-10 contry-city form-group">
+      <input [readonly]="!phoneEditFlag" class=" form-control" [value]="address?.country">
+      <input [readonly]="!phoneEditFlag" class=" form-control" [value]="address?.city">
+
+    </div>
+    <div class="col-md-3 col-sm-4 col-12 form-group street-home">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.street">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.homeNr">
+
+    </div>
+    <div class="col-md-3 col-sm-4 col-12 edit-picture"><img (click)="toggleEditPhone()" class="" src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"> </div>
+  </form>
+</div>

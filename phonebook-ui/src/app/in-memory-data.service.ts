@@ -49,6 +49,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   genId(contacts: Contact[]): number {
+    // @ts-ignore
     return contacts.length > 0 ? Math.max(...contacts.map(contact => contact.id)) + 1 : 11;
   }
 }
