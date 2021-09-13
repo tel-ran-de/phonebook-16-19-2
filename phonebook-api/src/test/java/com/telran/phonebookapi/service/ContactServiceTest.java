@@ -93,5 +93,12 @@ public class ContactServiceTest {
                         && argument.isFavorite()
                         && argument.getGroup() == Group.FAMILY));
     }
+
+    @Test
+    public void editContactNotFound() {
+        Exception exception = assertThrows(ContactNotFoundException.class, () -> contactService.editContact(7L, "Misha", "Petrov", 22, true, Group.FAMILY));
+        assertNotNull(exception);
+        assertEquals("Contact with id 7 doesn't exist", exception.getMessage());
+    }
 }
 
