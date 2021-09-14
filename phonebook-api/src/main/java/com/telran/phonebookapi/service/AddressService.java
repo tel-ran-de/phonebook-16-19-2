@@ -50,8 +50,8 @@ public class AddressService {
 
     public Iterable<Address> getAll(long contactId) {
         return contactRepository.findById(contactId)
-                .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " not found")).getAddresses();
-
+                .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " not found"))
+                .getAddresses();
 
     }
 
