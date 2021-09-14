@@ -20,14 +20,14 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public void add(String country, String city, String index, String street, String homeNr, boolean isFavorite, long contactId) {
+    public Address add(String country, String city, String index, String street, String homeNr, boolean isFavorite, long contactId) {
         Contact contact = contactRepository.findById(contactId)
                 .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " doesn't exist"));
         Address address = new Address(country, city, index, street, homeNr, isFavorite, contact);
-        addressRepository.save(address);
+        return addressRepository.save(address);
     }
 
-    public void edit(Long id, String country, String city, String index, String street, String homeNr, boolean isFavorite) {
+    public Address edit(Long id, String country, String city, String index, String street, String homeNr, boolean isFavorite) {
         Address address = getById(id);
         address.setCountry(country);
         address.setCity(city);
@@ -36,7 +36,7 @@ public class AddressService {
         address.setHomeNr(homeNr);
         address.setFavorite(isFavorite);
 
-        addressRepository.save(address);
+        return addressRepository.save(address);
     }
 
     public Address getById(long id) {
