@@ -2,8 +2,9 @@ package com.telran.phonebookapi.service;
 
 import com.telran.phonebookapi.entity.Address;
 import com.telran.phonebookapi.entity.Contact;
-import com.telran.phonebookapi.entity.Group;
+
 import com.telran.phonebookapi.exception.AddressNotFoundException;
+import com.telran.phonebookapi.exception.ContactNotFoundException;
 import com.telran.phonebookapi.repository.AddressRepository;
 import com.telran.phonebookapi.repository.ContactRepository;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +49,7 @@ public class AddressServiceTest {
     @Test
     public void addContactNotExist() {
         Address address = new Address("Country", "City", "index", "Street", "homeNr", false, contact);
-        Exception exception = assertThrows(EntityNotFoundException.class, () ->
+        Exception exception = assertThrows(ContactNotFoundException.class, () ->
                 addressService.add(address.getCountry(), address.getCity(), address.getIndex(), address.getStreet(), address.getHomeNr(), address.isFavorite(),
                         address.getContact().getId() + 1));
         verify(contactRepository, times(1)).findById(1L);
