@@ -2,6 +2,7 @@ package com.telran.phonebookapi.service;
 
 import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Phone;
+import com.telran.phonebookapi.exception.ContactNotFoundException;
 import com.telran.phonebookapi.exception.PhoneNotFoundException;
 import com.telran.phonebookapi.repository.ContactRepository;
 import com.telran.phonebookapi.repository.PhoneRepository;
