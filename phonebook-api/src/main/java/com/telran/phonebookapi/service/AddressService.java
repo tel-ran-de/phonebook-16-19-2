@@ -32,7 +32,7 @@ public class AddressService {
         address.setCountry(country);
         address.setCity(city);
         address.setIndex(index);
-        address.setStreet(street);
+        address.setAddress(street);
         address.setHomeNr(homeNr);
         address.setFavorite(isFavorite);
 
