@@ -1,0 +1,56 @@
+@media screen and (max-width: 1160px ) {
+  html {
+    font-size: 5px;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15vw;
+  padding-left: 15vw;
+}
+
+header img {
+  width: 10vw;
+  min-width: 60px;
+  height: auto;
+}
+
+header nav {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  line-height: 3rem;
+}
+
+header nav a {
+  text-decoration: none;
+  margin-right: 3vw;
+  font-size: 2rem;
+  color: black;
+  text-shadow: 1px 2px 3px darkgray;
+}
+
+header nav a:hover {
+  color: darkgray;
+}
+
+header button {
+  width: auto;
+  height: 50px;
+  border-radius: 50px;
+  padding: 0 1rem 0 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  background-color: #477267;
+  color: white;
+}
+
+header button:hover {
+  box-shadow: 1px 1px 2px black, 0 0 1em darkgray;
+}
+
+
