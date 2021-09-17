@@ -2,7 +2,6 @@ package com.telran.phonebookapi.controller;
 
 import com.telran.phonebookapi.dto.ErrorDto;
 import com.telran.phonebookapi.exception.ContactNotFoundException;
-import com.telran.phonebookapi.exception.EmailExistsException;
 import com.telran.phonebookapi.exception.EmailNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,12 +11,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
-    @ExceptionHandler(EmailExistsException.class)
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorDto handleEmailExistsException(EmailExistsException e) {
-        return new ErrorDto(e.getMessage());
-    }
 
     @ExceptionHandler(ContactNotFoundException.class)
     @ResponseBody

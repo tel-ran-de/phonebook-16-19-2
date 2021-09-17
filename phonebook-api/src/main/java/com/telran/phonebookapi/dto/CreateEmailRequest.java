@@ -1,16 +1,20 @@
 package com.telran.phonebookapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Getter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-@Data
+@Getter
 public class CreateEmailRequest {
     @NotEmpty @Email
     private String email;
-    @JsonProperty("isFavorite")
-    private boolean isFavorite;
+    private boolean favorite;
     private long contactId;
+
+    public CreateEmailRequest(String email, boolean favorite, long contactId) {
+        this.email = email;
+        this.favorite = favorite;
+        this.contactId = contactId;
+    }
 }

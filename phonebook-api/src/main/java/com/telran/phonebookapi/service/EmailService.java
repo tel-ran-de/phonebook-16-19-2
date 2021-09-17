@@ -3,11 +3,11 @@ package com.telran.phonebookapi.service;
 import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Email;
 import com.telran.phonebookapi.exception.ContactNotFoundException;
-import com.telran.phonebookapi.exception.EmailExistsException;
 import com.telran.phonebookapi.exception.EmailNotFoundException;
 import com.telran.phonebookapi.repository.ContactRepository;
 import com.telran.phonebookapi.repository.EmailRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -46,18 +46,12 @@ public class EmailService {
         return contact.getEmails();
     }
 
-    public Email edit(Long id, String email, boolean isFavorite) {
+    public void edit(Long id, String email, boolean isFavorite) {
         Email newEmail = emailRepository.findById(id)
                 .orElseThrow(() -> new EmailNotFoundException("Email with id: " + id + " not found"));
         if (email != null)
             newEmail.setEmail(email);
             newEmail.setFavorite(isFavorite);
-        return emailRepository.save(newEmail);
-    }
-
-    public void checkIfEmailDoesNotExist(String email) {
-        if (emailRepository.findByEmail(email) != null) {
-            throw new EmailExistsException("Email " + email + " already exists");
-        }
+         emailRepository.save(newEmail);
     }
 }

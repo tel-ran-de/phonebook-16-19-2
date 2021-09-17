@@ -13,42 +13,41 @@ import javax.validation.Valid;
 
 import java.util.stream.Collectors;
 
-import static com.telran.phonebookapi.mapper.EmailMapper.emailToFullEmailResponse;
-import static com.telran.phonebookapi.mapper.EmailMapper.emailToRegisterEmailResponse;
 
 @RestController
 @RequestMapping("/api/email")
 public class EmailController {
     private final EmailService emailService;
+    private final EmailMapper emailMapper;
 
-    public EmailController(EmailService emailService) {
+    public EmailController(EmailService emailService, EmailMapper emailMapper) {
         this.emailService = emailService;
+        this.emailMapper = emailMapper;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreateEmailResponse addEmail(@Valid @RequestBody CreateEmailRequest createEmailRequest) {
-        emailService.checkIfEmailDoesNotExist(createEmailRequest.getEmail());
         Email email = emailService.add(
                 createEmailRequest.getEmail(),
                 createEmailRequest.isFavorite(),
                 createEmailRequest.getContactId()
         );
-        return emailToRegisterEmailResponse(email);
+        return emailMapper.emailToRegisterEmailResponse(email);
     }
 
     @GetMapping("/{id}/all")
     public Iterable<FullEmailResponse> getAllEmails(@PathVariable Long id) {
         return emailService.getAll(id)
                 .stream()
-                .map(EmailMapper::emailToFullEmailResponse)
+                .map(emailMapper::emailToFullEmailResponse)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public FullEmailResponse getEmailById(@PathVariable Long id) {
         Email email = emailService.get(id);
-        return emailToFullEmailResponse(email);
+        return emailMapper.emailToFullEmailResponse(email);
     }
 
     @DeleteMapping("/{id}")
@@ -58,6 +57,6 @@ public class EmailController {
 
     @PutMapping("/{id}")
     public void updateEmail(@PathVariable Long id, @RequestBody CreateEmailRequest createEmailRequest) {
-        emailToFullEmailResponse(emailService.edit(id, createEmailRequest.getEmail(), createEmailRequest.isFavorite()));
+        emailService.edit(id, createEmailRequest.getEmail(), createEmailRequest.isFavorite());
     }
 }
