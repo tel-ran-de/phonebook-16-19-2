@@ -1,8 +1,6 @@
 package com.telran.phonebookapi.entity;
 
-import com.sun.istack.NotNull;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -21,7 +19,7 @@ public class Address {
     @Setter
     private String index;
     @Setter
-    private String address;
+    private String street;
     @Setter
     private String homeNr;
     @Setter
@@ -34,7 +32,7 @@ public class Address {
         this.country = country;
         this.city = city;
         this.index = index;
-        this.address = address;
+        this.street = address;
         this.homeNr = homeNr;
         this.isFavorite = isFavorite;
         this.contact = contact;
@@ -45,11 +43,11 @@ public class Address {
         if (this == o) return true;
         if (!(o instanceof Address)) return false;
         Address address1 = (Address) o;
-        return Objects.equals(id, address1.id) && Objects.equals(country, address1.country) && Objects.equals(city, address1.city) && Objects.equals(index, address1.index) && Objects.equals(address, address1.address) && Objects.equals(homeNr, address1.homeNr);
+        return Objects.equals(id, address1.id) && Objects.equals(country, address1.country) && Objects.equals(city, address1.city) && Objects.equals(index, address1.index) && Objects.equals(street, address1.street) && Objects.equals(homeNr, address1.homeNr);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, country, city, index, address, homeNr);
+        return Objects.hash(id, country, city, index, street, homeNr);
     }
 }
