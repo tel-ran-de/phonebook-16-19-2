@@ -28,11 +28,11 @@ public class Address {
     @ManyToOne
     private Contact contact;
 
-    public Address(@NonNull String country, @NonNull String city, @NonNull String index, @NonNull String address, @NonNull String homeNr, boolean isFavorite, @NonNull Contact contact) {
+    public Address(@NonNull String country, @NonNull String city, @NonNull String index, @NonNull String street, @NonNull String homeNr, boolean isFavorite, @NonNull Contact contact) {
         this.country = country;
         this.city = city;
         this.index = index;
-        this.street = address;
+        this.street = street;
         this.homeNr = homeNr;
         this.isFavorite = isFavorite;
         this.contact = contact;

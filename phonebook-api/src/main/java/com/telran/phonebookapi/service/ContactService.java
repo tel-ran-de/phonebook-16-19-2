@@ -17,8 +17,8 @@ public class ContactService {
         this.contactRepository = contactRepository;
     }
 
-    public Contact add(String fName, String lName, int age, boolean isFavourite, Group group) {
-        return contactRepository.save(new Contact(fName, lName, age, isFavourite, group));
+    public Contact add(String fName, String lName, int age, boolean isFavorite, Group group) {
+        return contactRepository.save(new Contact(fName, lName, age, isFavorite, group));
     }
 
     public Contact get(Long id) {
@@ -36,7 +36,7 @@ public class ContactService {
         return contactRepository.findAll();
     }
 
-    public void editContact(Long id, String fName, String lName, int age, boolean isFavourite, Group group) {
+    public void editContact(Long id, String fName, String lName, int age, boolean isFavorite, Group group) {
         Contact contact = contactRepository.findById(id).
                 orElseThrow(() -> new ContactNotFoundException("Contact with id " + id + " doesn't exist"));
         if(fName != null)
@@ -44,7 +44,7 @@ public class ContactService {
         if(lName != null)
         contact.setLastName(lName);
         contact.setAge(age);
-        contact.setFavorite(isFavourite);
+        contact.setFavorite(isFavorite);
         contact.setGroup(group);
         contactRepository.save(contact);
     }
