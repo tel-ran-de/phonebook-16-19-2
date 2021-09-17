@@ -13,7 +13,6 @@ import javax.validation.Valid;
 
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/api/email")
 public class EmailController {

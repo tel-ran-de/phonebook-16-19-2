@@ -1,20 +1,21 @@
 package com.telran.phonebookapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateEmailRequest {
-    @NotEmpty @Email
+    @NotEmpty(message = "The field should not be empty")
+    @Pattern(regexp = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+", message = "Email is not valid. Please, try again")
     private String email;
-    private boolean favorite;
+    @JsonProperty("isFavorite")
+    private boolean isFavorite;
+    @Positive
     private long contactId;
-
-    public CreateEmailRequest(String email, boolean favorite, long contactId) {
-        this.email = email;
-        this.favorite = favorite;
-        this.contactId = contactId;
-    }
 }

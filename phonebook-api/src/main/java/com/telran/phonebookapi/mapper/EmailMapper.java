@@ -8,15 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailMapper {
      public CreateEmailResponse emailToRegisterEmailResponse(Email email) {
-        CreateEmailResponse createEmailResponse = new CreateEmailResponse();
-        createEmailResponse.setId(email.getId());
-        return createEmailResponse;
+        return new CreateEmailResponse(email.getId());
      }
 
     public FullEmailResponse emailToFullEmailResponse (Email email) {
-        FullEmailResponse fullEmailResponse = new FullEmailResponse();
-        fullEmailResponse.setEmail(email.getEmail());
-        fullEmailResponse.setId(email.getId());
-        return fullEmailResponse;
+        return new FullEmailResponse(email.getId(), email.getEmail());
     }
 }
