@@ -49,7 +49,7 @@ public class AddressServiceTest {
     public void addContactNotExist() {
         Address address = new Address("Country", "City", "index", "Street", "homeNr", false, contact);
         Exception exception = assertThrows(ContactNotFoundException.class, () ->
-                addressService.add(address.getCountry(), address.getCity(), address.getIndex(), address.getAddress(), address.getHomeNr(), address.isFavorite(),
+                addressService.add(address.getCountry(), address.getCity(), address.getIndex(), address.getStreet(), address.getHomeNr(), address.isFavorite(),
                         address.getContact().getId() + 1));
         verify(contactRepository, times(1)).findById(1L);
         assertEquals("Contact with id " + (contact.getId() + 1) + " doesn't exist", exception.getMessage());
@@ -66,7 +66,7 @@ public class AddressServiceTest {
                 .save(argThat(argument -> argument.getCountry().equals("Russia")
                         && argument.getCity().equals("SBP")
                         && argument.getIndex().equals("12600")
-                        && argument.getAddress().equals("Esenina")
+                        && argument.getStreet().equals("Esenina")
                         && argument.getHomeNr().equals("1")
                         && argument.isFavorite()));
 
@@ -83,7 +83,7 @@ public class AddressServiceTest {
                 .save(argThat(argument -> argument.getCountry().equals("Germany")
                         && argument.getCity().equals("SBP")
                         && argument.getIndex().equals("77137")
-                        && argument.getAddress().equals("Morgenst.")
+                        && argument.getStreet().equals("Morgenst.")
                         && argument.getHomeNr().equals("11")
                         && argument.isFavorite()));
 
