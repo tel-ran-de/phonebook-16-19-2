@@ -1,6 +1,9 @@
 package com.telran.phonebookapi.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,11 +31,11 @@ public class Contact {
     private Group group;
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private List<Phone> phones;
+    private List<Phone> phones = new ArrayList<>();
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private List<Address> addresses;
+    private List<Address> addresses = new ArrayList<>();
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
-    private List<Email> emails;
+    private List<Email> emails = new ArrayList<>();
 
     public Contact(@NonNull String firstName, @NonNull String lastName, int age, boolean isFavorite, @NonNull Group group) {
         this.firstName = firstName;
@@ -40,9 +43,6 @@ public class Contact {
         this.age = age;
         this.isFavorite = isFavorite;
         this.group = group;
-        phones = new ArrayList<>();
-        addresses = new ArrayList<>();
-        emails = new ArrayList<>();
     }
 
     public void addAddress(@NonNull Address address) {

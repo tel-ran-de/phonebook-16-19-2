@@ -23,7 +23,7 @@ public class ContactMapperTest {
         assertEquals(contact.getLastName(), contactDto.lastName);
         assertEquals(contact.getAge(), contactDto.age);
         assertEquals(contact.isFavorite(), contactDto.isFavorite);
-        assertEquals(contact.getGroup(), contactDto.group);
+        assertEquals(contact.getGroup(), Group.valueOf(contactDto.group));
     }
 
     @Test

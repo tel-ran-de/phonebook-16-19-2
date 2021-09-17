@@ -2,6 +2,7 @@ package com.telran.phonebookapi.controller;
 
 import com.telran.phonebookapi.dto.ContactDto;
 import com.telran.phonebookapi.entity.Contact;
+import com.telran.phonebookapi.entity.Group;
 import com.telran.phonebookapi.mapper.ContactMapper;
 import com.telran.phonebookapi.service.ContactService;
 import org.springframework.web.bind.annotation.*;
@@ -24,16 +25,13 @@ public class ContactController {
 
     @PostMapping("")
     public ContactDto add(@RequestBody ContactDto contactDto) {
-        if (contactDto.firstName != null && contactDto.lastName != null && contactDto.group != null) {
-            Contact contact = contactService.add(contactDto.firstName, contactDto.lastName, contactDto.age, contactDto.isFavorite, contactDto.group);
-            return contactMapper.toDto(contact);
-        }
-        return null;
+        Contact contact = contactService.add(contactDto.firstName, contactDto.lastName, contactDto.age, contactDto.isFavorite, Group.valueOf(contactDto.group));
+        return contactMapper.toDto(contact);
     }
 
     @PutMapping("/{id}")
     public void edit(@RequestBody ContactDto contactDto, @PathVariable Long id) {
-        contactService.editContact(id, contactDto.firstName, contactDto.lastName, contactDto.age, contactDto.isFavorite, contactDto.group);
+        contactService.editContact(id, contactDto.firstName, contactDto.lastName, contactDto.age, contactDto.isFavorite, Group.valueOf(contactDto.group));
     }
 
     @GetMapping("")
