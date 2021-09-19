@@ -6,7 +6,11 @@ import com.telran.phonebookapi.exception.ContactNotFoundException;
 import com.telran.phonebookapi.exception.EmailNotFoundException;
 import com.telran.phonebookapi.repository.ContactRepository;
 import com.telran.phonebookapi.repository.EmailRepository;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class EmailService {
     private final EmailRepository emailRepository;
     private final ContactRepository contactRepository;
@@ -17,10 +21,10 @@ public class EmailService {
         this.contactRepository = contactRepository;
     }
 
-    public Email add(String email, boolean isFavourite, Long contactId) {
+    public Email add(String email, boolean isFavorite, Long contactId) {
         Contact contact = contactRepository.findById(contactId)
                 .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " doesn't exist"));
-        Email newEmail = new Email(email, isFavourite, contact);
+        Email newEmail = new Email(email, isFavorite, contact);
         contact.addEmail(newEmail);
         return emailRepository.save(newEmail);
     }
@@ -36,7 +40,7 @@ public class EmailService {
         emailRepository.deleteById(id);
     }
 
-    public Iterable<Email> getAll(Long contactId) {
+    public List<Email> getAll(Long contactId) {
         Contact contact = contactRepository.findById(contactId)
                 .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " doesn't exist"));
         return contact.getEmails();
@@ -47,7 +51,7 @@ public class EmailService {
                 .orElseThrow(() -> new EmailNotFoundException("Email with id: " + id + " not found"));
         if (email != null)
             newEmail.setEmail(email);
-        newEmail.setFavorite(isFavorite);
-        emailRepository.save(newEmail);
+            newEmail.setFavorite(isFavorite);
+         emailRepository.save(newEmail);
     }
 }

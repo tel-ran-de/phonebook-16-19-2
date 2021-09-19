@@ -2,7 +2,6 @@ package com.telran.phonebookapi.service;
 
 import com.telran.phonebookapi.entity.Address;
 import com.telran.phonebookapi.entity.Contact;
-
 import com.telran.phonebookapi.exception.AddressNotFoundException;
 import com.telran.phonebookapi.exception.ContactNotFoundException;
 import com.telran.phonebookapi.repository.AddressRepository;
@@ -101,7 +100,6 @@ public class AddressServiceTest {
 
     @Test
     public void getAllTest() {
-        when(contactRepository.existsById(1L)).thenReturn(true);
         when(contactRepository.findById(1L)).thenReturn(Optional.of(contact));
         Address address = new Address("Germany", "Karlsruhe", "77137", "Morgenst.", "11", true, contact);
         ArrayList<Address> addresses = new ArrayList<>(Arrays.asList(address, address, address, address));
@@ -114,7 +112,6 @@ public class AddressServiceTest {
 
     @Test
     public void getAllWhenListIsEmptyTest() {
-        when(contactRepository.existsById(12L)).thenReturn(true);
         when(contactRepository.findById(12L)).thenReturn(Optional.of(contact));
         List<Address> addressList = (List<Address>) addressService.getAll(12L);
         assertEquals(addressList.size(), 0);
