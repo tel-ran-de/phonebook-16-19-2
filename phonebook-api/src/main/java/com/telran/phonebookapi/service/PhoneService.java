@@ -8,6 +8,8 @@ import com.telran.phonebookapi.repository.ContactRepository;
 import com.telran.phonebookapi.repository.PhoneRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PhoneService {
     private final PhoneRepository phoneRepository;
@@ -37,7 +39,7 @@ public class PhoneService {
         phoneRepository.deleteById(id);
     }
 
-    public Iterable<Phone> getAll(Long contactId) {
+    public List<Phone> getAll(Long contactId) {
         Contact contact = contactRepository.findById(contactId)
                 .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " doesn't exist"));
         return contact.getPhones();
