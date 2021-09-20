@@ -4,14 +4,19 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './in-memory-data.service';
-import { AppRoutingModule } from './app-routing.module';
-import { NavigationComponent } from './navigation/navigation.component';
+import {AppRoutingModule} from './app-routing.module';
+import {NavigationComponent} from './navigation/navigation.component';
+import {AddContactFormComponent} from './add-contact-form/add-contact-form.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    AddContactFormComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +24,9 @@ import { NavigationComponent } from './navigation/navigation.component';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false}
     ),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
