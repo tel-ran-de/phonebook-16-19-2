@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,7 +36,7 @@ public class PhoneController {
     }
 
     @GetMapping("/{id}/all")
-    public Iterable<CreatePhoneResponse> getAllPhones(@PathVariable Long id) {
+    public List<CreatePhoneResponse> getAllPhones(@PathVariable Long id) {
         return phoneService.getAll(id)
                 .stream()
                 .map(phoneMapper::phoneToRegisterPhoneResponse)
@@ -54,7 +55,7 @@ public class PhoneController {
     }
 
     @PutMapping("/{id}")
-    public void updatePhone(@PathVariable Long id, @RequestBody CreatePhoneRequest createPhoneRequest) {
+    public void updatePhone(@PathVariable Long id, @Valid @RequestBody CreatePhoneRequest createPhoneRequest) {
         phoneService.edit(
                 id,
                 createPhoneRequest.getCountryCode(),
