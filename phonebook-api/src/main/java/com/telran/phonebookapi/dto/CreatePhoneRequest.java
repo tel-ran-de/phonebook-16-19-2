@@ -19,6 +19,6 @@ public class CreatePhoneRequest {
     @JsonProperty("isFavorite")
     private boolean isFavorite;
     @Positive
-    private long contactId;
+    private Long contactId;
 
 }

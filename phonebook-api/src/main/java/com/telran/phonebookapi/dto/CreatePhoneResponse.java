@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreatePhoneResponse {
-    private long id;
+    private Long id;
     private String countryCode;
     private String telephoneNumber;
 }
