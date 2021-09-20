@@ -1,7 +1,5 @@
 package com.telran.phonebookapi.dto;
 
-import com.telran.phonebookapi.entity.Contact;
-import com.telran.phonebookapi.entity.Address;
 
 public class AddressDto {
     public Long id;

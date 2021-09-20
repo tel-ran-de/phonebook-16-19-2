@@ -4,7 +4,6 @@ import com.telran.phonebookapi.dto.AddressDto;
 import com.telran.phonebookapi.entity.Address;
 import com.telran.phonebookapi.mapper.AddressMapper;
 import com.telran.phonebookapi.service.AddressService;
-import com.telran.phonebookapi.service.ContactService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,6 @@ public class AddressController {
     public AddressController(AddressService addressService, AddressMapper addressMapper) {
         this.addressService = addressService;
         this.addressMapper = addressMapper;
-        //this.contactService = contactService;
     }
 
     @PostMapping
