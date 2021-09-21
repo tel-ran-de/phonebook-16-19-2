@@ -1,0 +1,27 @@
+<div class="container address">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Address</div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+  <form class="row ">
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class="">
+        <div (click)="toggleStar()" class="star star-{{address?.isFavorite }}"></div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-5 col-10 contry-city form-group">
+      <input [readonly]="!addressEditFlag" class=" form-control" [value]="address?.country">
+      <input [readonly]="!addressEditFlag" class=" form-control" [value]="address?.city">
+
+    </div>
+    <div class="col-md-3 col-sm-4 col-12 form-group street-home">
+      <input [readonly]="!addressEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.street">
+      <input [readonly]="!addressEditFlag" class="col-md-6 col-sm-12 form-control" [value]="address?.homeNr">
+
+    </div>
+    <div class="col-md-3 col-sm-4 col-12 edit-picture"><img (click)="toggleEditAddress()" class=""
+                                                            src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"></div>
+  </form>
+</div>

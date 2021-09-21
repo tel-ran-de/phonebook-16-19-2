@@ -1,0 +1,20 @@
+<div class="container email">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Email</div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+  <form class="row ">
+    <div class="col-md-1 col-sm-2 col-1">
+      <div class="">
+        <div (click)="toggleStar()" class="star star-{{email?.isFavorite }}"></div>
+      </div>
+    </div>
+
+    <div class="col-md-7 col-sm-6 col-10 form-group">
+      <input [readonly]="!emailEditFlag" class="col-md-6 col-sm-12 form-control" [value]="email?.email">
+    </div>
+    <div class="col-md-3 col-sm-5 col-6 edit-picture"><img (click)="toggleEditEmail()" class=""
+                                                           src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"></div>
+  </form>
+</div>
