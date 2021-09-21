@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from "../../model/contact";
 import {ActivatedRoute} from "@angular/router";
 import {ContactService} from "../../service/contact.service";
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-contact',
@@ -17,9 +16,7 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private contactService: ContactService,
-    private location: Location
-  ) {
+    private contactService: ContactService) {
   }
 
   ngOnInit(): void {

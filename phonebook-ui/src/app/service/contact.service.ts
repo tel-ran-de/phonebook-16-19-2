@@ -8,7 +8,7 @@ import {Contact} from "../model/contact";
 })
 export class ContactService {
 
-  private contactUrl = '/api/contacts';
+  private readonly contactUrl = '/api/contact';
 
   httpOptions = {
     headers: new HttpHeaders({

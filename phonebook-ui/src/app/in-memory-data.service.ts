@@ -7,7 +7,7 @@ import {Contact} from "./model/contact";
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const contacts = [
+    const contact = [
       {
         id: 1,
         firstName: "firsName",
@@ -45,7 +45,7 @@ export class InMemoryDataService implements InMemoryDbService {
         group: "FRIENDS"
       }
     ];
-    return {contacts};
+    return {contact};
   }
 
   genId(contacts: Contact[]): number {
