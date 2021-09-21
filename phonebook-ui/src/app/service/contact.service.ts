@@ -8,18 +8,23 @@ import {Contact} from "../model/contact";
 })
 export class ContactService {
 
-  constructor(private httpClient: HttpClient) {
-  }
+  private readonly contactUrl = '/api/contact';
 
-  private contactUrl = '/api/contacts'
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
   };
 
+  constructor(private httpClient: HttpClient) {
+  }
+
   addContact(contact: Contact): Observable<Contact> {
-    console.log(contact);
     return this.httpClient.post<Contact>(this.contactUrl, contact, this.httpOptions);
+  }
+
+  getContact(contactId: number): Observable<Contact> {
+    const url = `${this.contactUrl}/${contactId}`;
+    return this.httpClient.get<Contact>(url);
   }
 }

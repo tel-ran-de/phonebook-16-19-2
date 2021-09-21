@@ -1,12 +1,18 @@
-html{
+@import "~bootstrap/dist/css/bootstrap.css";
+
+body {
+  background-color: #C4D2BF;
+}
+
+html {
   padding: 0;
   margin: 0;
 }
-main{
+
+main {
   background-color: rgba(196, 210, 191, 0.78);
   margin: 0 auto 0 auto;
   width: 90%;
   height: 100%;
-  padding-top:20px ;
+  padding-top: 20px;
 }
-
