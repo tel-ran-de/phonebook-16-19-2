@@ -1,4 +1,4 @@
-<form [formGroup]="contactForm" (ngSubmit)="save()">
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
   <div class="validation-message">
     <div class="alert alert-danger" *ngIf=" contactForm.controls['firstName'].invalid &&
             contactForm.controls['firstName'].touched  ">
@@ -28,10 +28,12 @@
     <option value="FAMILY">FAMILY</option>
     <option value="NONE" selected>NONE</option>
   </select>
-  <button type="submit">save</button>
+  <div></div>
+  <button [disabled]="contactForm.invalid" type="submit">
+    save
+  </button>
   <button type="reset">clear</button>
+  <div class="errors" *ngIf="logError">
+    Error: {{logError}}
+  </div>
 </form>
-<div class="errors" *ngIf="logError">
-  Error: {{logError}}
-</div>
-

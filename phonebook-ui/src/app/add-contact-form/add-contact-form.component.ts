@@ -32,21 +32,13 @@ export class AddContactFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  save(): void {
-    let id: number;
-    this.subscription.push(this.contactService.addContact(this.contactForm.value).subscribe(value => id = value.id, error => this.logError = error));
-    if (this.logError)
-      console.log(this.logError);
-    id = 1;
-    this.router.navigateByUrl(`/id`);
+  onSubmit(): void {
+    const addSubscription = this.contactService.addContact(this.contactForm.value)
+      .subscribe(value => this.router.navigate(['contacts', value.id]), error => this.logError = error);
+    this.subscription.push(addSubscription);
   }
 
   ngOnDestroy(): void {
     this.subscription.forEach(value => value.unsubscribe());
   }
-
-  printForm(): void {
-    console.log(this.contactForm.value);
-  }
-
 }
