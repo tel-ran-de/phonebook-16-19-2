@@ -1,21 +1,30 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-
-import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {Contact} from "../model/contact";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  private contactsUrl = 'api/contacts';
 
-  constructor(private http: HttpClient) {
+  private readonly contactUrl = '/api/contact';
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
+
+  constructor(private httpClient: HttpClient) {
   }
 
-  getContact(id: number): Observable<Contact> {
-    const url = `${this.contactsUrl}/${id}`;
-    return this.http.get<Contact>(url);
+  addContact(contact: Contact): Observable<Contact> {
+    return this.httpClient.post<Contact>(this.contactUrl, contact, this.httpOptions);
   }
 
+  getContact(contactId: number): Observable<Contact> {
+    const url = `${this.contactUrl}/${contactId}`;
+    return this.httpClient.get<Contact>(url);
+  }
 }
