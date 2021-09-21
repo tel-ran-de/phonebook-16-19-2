@@ -1,0 +1,23 @@
+<div class="container phone">
+  <div class="row">
+    <div class="col-md-11 col-sm-10 col-10 contact-title">Phone</div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png"></div>
+  </div>
+
+  <form class="row ">
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class="col-md-1 col-sm-1 ">
+        <div (click)="toggleStar()" class="star star-{{phone?.isFavorite }}"></div>
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-4 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-2 col-sm-2 form-control" [value]="phone?.countryCode">
+    </div>
+    <div class="col-md-5 col-sm-4 col-6 form-group">
+      <input [readonly]="!phoneEditFlag" class="col-md-6 col-sm-2 form-control" [value]="phone?.telephoneNumber">
+    </div>
+    <div class="col-md-3 col-sm-5 col-12 edit-picture"><img (click)="toggleEditPhone()" class=""
+                                                            src="assets/images/edit.png">
+      <img class="delete-line" src="assets/images/delete.png"></div>
+  </form>
+</div>

@@ -11,6 +11,7 @@ import { PhoneComponent } from './contact-details/phone/phone.component';
 import { EmailComponent } from './contact-details/email/email.component';
 import { AddressComponent } from './contact-details/address/address.component';
 import { ContactComponent } from './contact-details/contact/contact.component';
+import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ContactComponent } from './contact-details/contact/contact.component';
     EmailComponent,
     AddressComponent,
     ContactComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
