@@ -1,0 +1,41 @@
+form {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 0 auto;
+  font-size: 1.5rem;
+  padding: 2rem;
+}
+
+form label, form span {
+  margin-top: 1rem;
+}
+
+button {
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 1160px ) {
+  html {
+    font-size: 5px;
+  }
+}
+
+input.ng-touched.ng-invalid {
+  border: solid red 2px;
+}
+
+input.ng-touched.ng-valid {
+  border: solid green 2px;
+}
+
+.validation-message, .errors {
+  background-color: rgba(255, 0, 0, 0.29);
+  color: blue;
+  font-size: 0.9rem;
+  border-radius: 5px;
+}
+
+.validation-message * {
+  margin-left: 5px;
+}

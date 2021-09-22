@@ -7,45 +7,45 @@ import {Contact} from "./model/contact";
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const contacts = [
+    const contact = [
       {
         id: 1,
-        firsName: "firsName",
+        firstName: "firsName",
         lastName: "lastName",
         age: 18,
         isFavorite: true,
         group: "FRIENDS"
       }, {
         id: 2,
-        firsName: "Benjamin",
+        firstName: "Benjamin",
         lastName: "Top",
         age: 77,
         isFavorite: false,
         group: "FAMILY"
       }, {
         id: 3,
-        firsName: "Vovka",
+        firstName: "Vovka",
         lastName: "Bulkin",
         age: 12,
         isFavorite: true,
         group: "FRIENDS"
       }, {
         id: 4,
-        firsName: "Nick",
+        firstName: "Nick",
         lastName: "Dulitl",
         age: 56,
         isFavorite: true,
         group: "NONE"
       }, {
         id: 5,
-        firsName: "Otto",
+        firstName: "Otto",
         lastName: "Skin",
         age: 32,
         isFavorite: false,
         group: "FRIENDS"
       }
     ];
-    return {contacts};
+    return {contact};
   }
 
   genId(contacts: Contact[]): number {

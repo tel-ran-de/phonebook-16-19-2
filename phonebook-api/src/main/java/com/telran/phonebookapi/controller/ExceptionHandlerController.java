@@ -3,6 +3,7 @@ package com.telran.phonebookapi.controller;
 import com.telran.phonebookapi.dto.ErrorDto;
 import com.telran.phonebookapi.exception.ContactNotFoundException;
 import com.telran.phonebookapi.exception.EmailNotFoundException;
+import com.telran.phonebookapi.exception.PhoneNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -30,6 +31,14 @@ public class ExceptionHandlerController {
     public ErrorDto handleEmailNotFoundException(EmailNotFoundException e) {
         return new ErrorDto(e.getMessage());
     }
+
+    @ExceptionHandler(PhoneNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDto handlePhoneNotFoundException(PhoneNotFoundException e) {
+        return new ErrorDto(e.getMessage());
+    }
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
