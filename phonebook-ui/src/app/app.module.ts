@@ -14,6 +14,7 @@ import {PhoneComponent} from './contact-details/phone/phone.component';
 import {EmailComponent} from './contact-details/email/email.component';
 import {AddressComponent} from './contact-details/address/address.component';
 import {ContactComponent} from './contact-details/contact/contact.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {ContactComponent} from './contact-details/contact/contact.component';
     ),
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],
