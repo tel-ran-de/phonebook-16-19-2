@@ -33,7 +33,9 @@ export class ContactComponent implements OnInit {
     this.contactEditFlag = !this.contactEditFlag;
   }
 
-  save(): void {
+  updateContact() {
+    this.contactService.updateContact(this.contact)
+      .subscribe();
     this.contactEditFlag = !this.contactEditFlag;
   }
 }
