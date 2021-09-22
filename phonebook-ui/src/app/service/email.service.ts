@@ -21,10 +21,8 @@ export class EmailService {
 
   getEmails(contactId: number): Observable<Email[]> {
     //url for facked backend
-    //когда будет присоеденен наш backend, тогда нужно удалит эту строку
     const url = `${this.emailUrl}?contactId=${contactId}`;
     //url for our backend
-    //когда будет присоеденен наш backend,тогда нужно использовать эту строку
     // const url = `${this.emailUrl}/${contactId}`;
     return this.httpClient.get<Email[]>(url)
   }
