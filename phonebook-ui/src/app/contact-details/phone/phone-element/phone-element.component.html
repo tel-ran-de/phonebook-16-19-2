@@ -1,0 +1,39 @@
+<li *ngIf="phone">
+  <form [formGroup]="updatePhoneForm" class="row">
+    <div class="col-md-1 col-sm-2 col-1">
+      <div class="">
+        <div (click)="toggleStar()"
+             [ngClass]="flag ? 'star-true': 'star-false'"
+             class="star pointer">
+        </div>
+      </div>
+    </div>
+    <div class="row col-md-7 col-sm-6 col-10 form-group">
+      <input [readonly]="!phoneEditFlag" formControlName="countryCode"
+             class="col-md-4 col-sm-6 col-3 form-control text-right"
+             [value]="phone.countryCode" placeholder="country code">
+      <input [readonly]="!phoneEditFlag" formControlName="telephoneNumber" class="col-md-8 col-sm-6 col-6 form-control"
+             [value]="phone.telephoneNumber" placeholder="telephone number">
+    </div>
+    <div class="col-md-3 col-sm-5 col-1 edit-picture">
+      <img (click)="phoneEditFlag = true" *ngIf="!phoneEditFlag" src="assets/images/edit.png" alt="edit"
+           class="pointer">
+      <img (click)="onClickSave()" *ngIf="phoneEditFlag" src="assets/images/save.png" alt="save" class="pointer">
+      <img (click)="onClickDelete(phone)" src="assets/images/delete.png" alt="delete" class="delete-line pointer">
+    </div>
+
+  </form>
+  <div class="validation-message">
+    <div class="alert alert-danger" *ngIf="logError">
+      Error: {{logError}}
+    </div>
+    <div class="alert alert-danger" *ngIf=" updatePhoneForm.controls['countryCode'].invalid &&
+            updatePhoneForm.controls['countryCode'].touched  ">
+      country code not specified
+    </div>
+    <div class="alert alert-danger" *ngIf=" updatePhoneForm.controls['telephoneNumber'].invalid &&
+            updatePhoneForm.controls['telephoneNumber'].touched  ">
+      telephone number not specified
+    </div>
+  </div>
+</li>

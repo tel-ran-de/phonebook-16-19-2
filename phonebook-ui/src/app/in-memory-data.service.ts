@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {InMemoryDbService} from 'angular-in-memory-web-api';
 import {Contact} from "./model/contact";
+import {Phone} from "./model/phone";
 
 @Injectable({
   providedIn: 'root',
@@ -45,10 +46,32 @@ export class InMemoryDataService implements InMemoryDbService {
         group: "FRIENDS"
       }
     ];
-    return {contact};
+
+    function generatePhone() {
+      const phoneArr: Phone[] = [];
+      let id = 1;
+      for (let contactElement of contact) {
+        for (let i = 1; i < 6; i++) {
+          phoneArr.push(
+            {
+              id: id,
+              countryCode: '+' + id,
+              telephoneNumber: '777-' + contactElement.id + id,
+              isFavorite: i % 3 === 0,
+              contactId: contactElement.id
+            }
+          );
+          id++;
+        }
+      }
+      return phoneArr;
+    }
+
+    const phone: Phone[] = generatePhone();
+    return {contact, phone};
   }
 
-  genId(contacts: Contact[]): number {
+  genId(contacts: Contact[] | Phone[]): number {
     return contacts.length > 0 ? Math.max(...contacts.map(contact => contact.id)) + 1 : 11;
   }
 }

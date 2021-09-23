@@ -1,0 +1,27 @@
+
+input.ng-touched.ng-invalid {
+  border: solid red 2px;
+}
+
+input.ng-touched.ng-valid {
+  border: solid green 2px;
+}
+
+.validation-message, .errors {
+  background-color: rgba(255, 0, 0, 0.29);
+  color: blue;
+  font-size: 0.9rem;
+  border-radius: 15px;
+}
+
+.validation-message * {
+  margin-left: 5px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+form{
+  margin-left: 16px;
+  padding: 20px;
+}
