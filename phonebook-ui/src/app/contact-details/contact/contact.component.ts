@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Contact} from "../../model/contact";
 import {ActivatedRoute} from "@angular/router";
 import {ContactService} from "../../service/contact.service";
-import {first} from "rxjs/operators";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['../contact-details.component.css']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
   public contactEditFlag = false;
   public contact: Contact | undefined;
   public imageSave = "assets/images/save.png";
   public imageEdit = "assets/images/edit.png";
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,13 +22,12 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getContact();
+    this.subscriptions.push(this.getContact());
   }
 
-  getContact(): void {
+  getContact(): Subscription {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.contactService.getContact(id)
-      .pipe(first())
+    return this.contactService.getContact(id)
       .subscribe(contact => this.contact = contact);
   }
 
@@ -37,9 +37,12 @@ export class ContactComponent implements OnInit {
 
   updateContact() {
     if (this.contact) {
-      this.contactService.updateContact(this.contact)
-        .pipe(first())
-        .subscribe(_ => this.contactEditFlag = !this.contactEditFlag
-    )}
+      this.subscriptions.push(this.contactService.updateContact(this.contact)
+        .subscribe(_ => this.contactEditFlag = !this.contactEditFlag))
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 }
