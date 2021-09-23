@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from "../../model/contact";
 import {ActivatedRoute} from "@angular/router";
 import {ContactService} from "../../service/contact.service";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-contact',
@@ -26,6 +27,7 @@ export class ContactComponent implements OnInit {
   getContact(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.contactService.getContact(id)
+      .pipe(first())
       .subscribe(contact => this.contact = contact);
   }
 
@@ -34,8 +36,10 @@ export class ContactComponent implements OnInit {
   }
 
   updateContact() {
-    this.contactService.updateContact(this.contact)
-      .subscribe();
-    this.contactEditFlag = !this.contactEditFlag;
+    if (this.contact) {
+      this.contactService.updateContact(this.contact)
+        .pipe(first())
+        .subscribe(_ => this.contactEditFlag = !this.contactEditFlag
+    )}
   }
 }

@@ -28,7 +28,7 @@ export class ContactService {
     return this.httpClient.get<Contact>(url);
   }
 
-  updateContact(contact: Contact | undefined): Observable<Contact> {
+  updateContact(contact: Contact): Observable<Contact> {
     return this.httpClient.put<Contact>(this.contactUrl, contact, this.httpOptions);
   }
 
