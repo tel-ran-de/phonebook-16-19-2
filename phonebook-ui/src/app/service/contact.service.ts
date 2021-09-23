@@ -27,4 +27,9 @@ export class ContactService {
     const url = `${this.contactUrl}/${contactId}`;
     return this.httpClient.get<Contact>(url);
   }
+
+  updateContact(contact: Contact): Observable<Contact> {
+    return this.httpClient.put<Contact>(this.contactUrl, contact, this.httpOptions);
+  }
+
 }
