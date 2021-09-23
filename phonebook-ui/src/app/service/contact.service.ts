@@ -27,4 +27,14 @@ export class ContactService {
     const url = `${this.contactUrl}/${contactId}`;
     return this.httpClient.get<Contact>(url);
   }
+
+  getContacts():Observable<Contact[]>{
+    return this.httpClient.get<Contact[]>(this.contactUrl);
+  }
+
+  removeContact(contactId:number):Observable<any>{
+    const url = `${this.contactUrl}/${contactId}`;
+    console.log(url);
+    return this.httpClient.delete<any>(url, this.httpOptions);
+  }
 }

@@ -1,0 +1,23 @@
+<input type="search" id="search" placeholder="Search">
+
+<ng-template [ngIf]="contacts && contacts.length === 0">
+no contacts elements
+</ng-template>
+<div>
+  <h5 class="card-title">Contacts</h5>
+</div>
+<ng-template [ngIf]="contacts && contacts.length > 0">
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div  class="col" *ngFor="let contact of contacts">
+    <div class="card">
+      <img src="assets/images/user.png" class="card-img-top" alt="user-contact">
+      <div class="card-body">
+        <a routerLink="/contacts/{{contact.id}}">{{contact.firstName}} {{contact.lastName}}</a>
+        <div class="delete-card">
+          <img class="delete-button" (click)="delete(contact.id)" [src]="imageDelete" alt="delete" >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-template>
