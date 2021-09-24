@@ -32,9 +32,8 @@ export class ContactService {
     return this.httpClient.get<Contact[]>(this.contactUrl);
   }
 
-  removeContact(contactId:number):Observable<any>{
+  removeContact(contactId:number):Observable<void>{
     const url = `${this.contactUrl}/${contactId}`;
-    console.log(url);
-    return this.httpClient.delete<any>(url, this.httpOptions).pipe();
+    return this.httpClient.delete<void>(url, this.httpOptions);
   }
 }
