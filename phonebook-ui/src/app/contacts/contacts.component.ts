@@ -1,8 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Contact} from "../model/contact";
-import {Phone} from "../model/phone";
-import {Email} from "../model/email";
-import {Router} from '@angular/router';
 import {ContactService} from "../service/contact.service";
 import {Subscription} from "rxjs";
 
@@ -20,11 +17,10 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   public imageDelete = "assets/images/delete.png";
 
-  constructor(private router: Router, private service: ContactService) {
+  constructor(private service: ContactService) {
   }
 
   ngOnInit(): void {
-    console.log("f");
     const getContactsSubscription = this.service.getContacts()
       .subscribe(contacts => this.contacts = contacts);
     this.subscriptions.push(getContactsSubscription);
@@ -32,7 +28,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   delete(id: number): void {
     const deleteContactSubscription = this.service.removeContact(id)
-      .subscribe(() => console.log("contact deleted"));
+      .subscribe(() => this.contacts = this.contacts?.filter(value => value.id !== id));
     this.subscriptions.push(deleteContactSubscription);
   }
 

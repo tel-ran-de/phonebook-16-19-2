@@ -35,6 +35,6 @@ export class ContactService {
   removeContact(contactId:number):Observable<any>{
     const url = `${this.contactUrl}/${contactId}`;
     console.log(url);
-    return this.httpClient.delete<any>(url, this.httpOptions);
+    return this.httpClient.delete<any>(url, this.httpOptions).pipe();
   }
 }
