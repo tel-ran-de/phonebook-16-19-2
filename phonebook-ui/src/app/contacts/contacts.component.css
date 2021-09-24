@@ -1,0 +1,50 @@
+.edit-picture {
+  align-self: center;
+}
+form > div.edit-picture.col-md-1 {
+  position: relative;
+  top: 17px;
+}
+form > div.de
+.container {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto 0 auto;
+  font-size: 1.5rem;
+  padding: 2rem;
+}
+@media (max-width: 767px) {
+  div{
+    font-size: 14px;
+  }
+  .container{
+    panding:0 25px;
+  }
+  .contact{
+    margin: 15px 0 0 0;
+  }
+}
+@media (max-width: 575px) {
+  div{
+    font-size: 12px;
+  }
+  .container{
+    panding:0 25px;
+  }
+  .contact{
+    margin: 15px 0 0 0;
+  }
+}
+#search{
+  width:60%;
+  background-position: center;
+  position: center;
+  margin: 40px 40px;
+}
+
+.delete-button {
+  width: 10%;
+  position: center;
+}
+
