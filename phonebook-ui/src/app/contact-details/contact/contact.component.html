@@ -9,19 +9,19 @@
     </div>
     <div class="col-md-3 col-sm-4 col-6 form-group">
       <label>First Name</label>
-      <input [readonly]="!contactEditFlag" class="form-control" [value]="contact?.firstName">
+      <input [readonly]="!contactEditFlag" name="firstName" class="form-control" [(ngModel)]="contact.firstName">
     </div>
 
     <div class="col-md-3 col-sm-3 col-6 form-group">
       <label>Last Name</label>
-      <input [readonly]="!contactEditFlag" class="form-control" [value]="contact?.lastName">
+      <input [readonly]="!contactEditFlag" name="lastName" class="form-control" [(ngModel)]="contact.lastName">
 
     </div>
     <div class="col-sm-1 col-md-1 edit-picture" *ngIf="!contactEditFlag">
       <img (click)="toggleEditContact()" [src]="imageEdit" alt="edit">
     </div>
     <div class="col-sm-1 col-md-1 edit-picture" *ngIf="contactEditFlag">
-      <img (click)="save()" [src]="imageSave" alt="save">
+      <img (click)="updateContact()" [src]="imageSave" alt="save">
     </div>
   </form>
 </div>
