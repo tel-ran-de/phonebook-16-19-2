@@ -12,7 +12,7 @@ import {PhoneComponent} from './contact-details/phone/phone.component';
 import {EmailComponent} from './contact-details/email/email.component';
 import {AddressComponent} from './contact-details/address/address.component';
 import {ContactComponent} from './contact-details/contact/contact.component';
-//import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {EmailElementComponent} from './contact-details/email/emeail-element/email-element.component';
 import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
@@ -26,14 +26,15 @@ import { ContactsComponent } from './contacts/contacts.component';
     EmailComponent,
     AddressComponent,
     ContactComponent,
-    ContactsComponent
+    ContactsComponent,
+    EmailElementComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
