@@ -28,11 +28,11 @@ export class ContactService {
     return this.httpClient.get<Contact>(url);
   }
 
-  getContacts(): Observable<Contact[]>{
+  getContacts(): Observable<Contact[]> {
     return this.httpClient.get<Contact[]>(this.contactUrl);
   }
 
-  removeContact(contactId: number): Observable<void>{
+  removeContact(contactId: number): Observable<void> {
     const url = `${this.contactUrl}/${contactId}`;
     return this.httpClient.delete<void>(url, this.httpOptions);
   }
