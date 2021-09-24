@@ -20,10 +20,7 @@ export class EmailService {
   }
 
   getEmails(contactId: number): Observable<Email[]> {
-    //url for facked backend
-    const url = `${this.emailUrl}?contactId=${contactId}`;
-    //url for our backend
-    // const url = `${this.emailUrl}/${contactId}`;
-    return this.httpClient.get<Email[]>(url)
+    const url = `${this.emailUrl}/${contactId}/all`;
+    return this.httpClient.get<Email[]>(url);
   }
 }
