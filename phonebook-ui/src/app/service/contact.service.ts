@@ -8,7 +8,7 @@ import {Contact} from "../model/contact";
 })
 export class ContactService {
 
-  private readonly contactUrl = '/api/contact';
+  private readonly contactUrl = 'api/contact';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,7 +29,7 @@ export class ContactService {
   }
 
   updateContact(contact: Contact): Observable<Contact> {
-    return this.httpClient.put<Contact>(this.contactUrl, contact, this.httpOptions);
+    return this.httpClient.put<Contact>(`${this.contactUrl}/${contact.id}`, contact, this.httpOptions);
   }
 
 }
