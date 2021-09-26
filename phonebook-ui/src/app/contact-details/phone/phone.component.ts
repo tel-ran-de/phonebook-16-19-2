@@ -14,7 +14,6 @@ export class PhoneComponent implements OnInit, OnDestroy {
   public phones: Phone[] = [];
   private subscriptions: Subscription[] = [];
   getAllPhoneErrorMessage: string | undefined;
-  phoneEditFlag = false;
   phoneAddFlag = false;
   addPhoneForm: boolean = false;
 
@@ -37,22 +36,39 @@ export class PhoneComponent implements OnInit, OnDestroy {
     this.getAllPhoneErrorMessage = "Error";
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions
-      .forEach(subscriptions => subscriptions.unsubscribe());
-  }
-
-  onClickSave() {
-    this.phoneEditFlag = false;
-  }
-
-  toggleEditPhone() {
-    this.phoneEditFlag = !this.phoneEditFlag;
-  }
 
   toggleAddForm() {
     this.addPhoneForm = !this.addPhoneForm;
     this.phoneAddFlag = !this.phoneAddFlag;
   }
 
+  addPhone($event: Phone): void {
+    this.phones.push($event);
+    this.toggleAddForm();
+    this.sortPhones();
+  }
+
+  updatePhone($event: Phone): void {
+    this.phones.forEach(value => {
+      if (value.id === $event.id) {
+        value = $event;
+      }
+    });
+    this.sortPhones();
+  }
+
+  deletePhone($event: Phone): void {
+    let deleteIndex = this.phones.indexOf($event);
+    this.phones.splice(deleteIndex, 1);
+    this.sortPhones();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions
+      .forEach(subscriptions => subscriptions.unsubscribe());
+  }
+
+  sortPhones(): void {
+    this.phones.sort((a, b) => Number(b.isFavorite) - Number(a.isFavorite));
+  }
 }

@@ -1,12 +1,7 @@
 Add new Phone:
 <form [formGroup]="phoneForm" class="row">
   <div class="col-md-1 col-sm-2 col-1">
-    <div class="">
-      <div (click)="toggleStar()"
-           [ngClass]="flag ? 'star-true': 'star-false'"
-           class="star pointer">
-      </div>
-    </div>
+    <input class="star" type="checkbox" formControlName="favorite">
   </div>
   <div class="row col-md-7 col-sm-6 col-10 form-group">
     <input formControlName="countryCode" class="col-md-4 col-sm-6 col-3 form-control text-right"
@@ -16,8 +11,8 @@ Add new Phone:
   </div>
   <div class="col-md-3 col-sm-5 col-1 edit-picture">
     <img (click)="onSubmit()" src="assets/images/save.png" alt="save" class="pointer">
-    <img (click)="clear()" class="delete-line" src="assets/images/delete.png"
-         alt="delete" class="pointer">
+    <img (click)="clear()" class="delete-line pointer" src="assets/images/delete.png"
+         alt="delete">
   </div>
   <div class="errors" *ngIf="logError">
     Error: {{logError}}

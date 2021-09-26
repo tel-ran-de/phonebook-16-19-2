@@ -6,10 +6,11 @@
       <img (click)="toggleAddForm()" *ngIf="phoneAddFlag" src="assets/images/delete.png" alt="minus" class="pointer">
     </div>
   </div>
-  <app-add-phone-form *ngIf="addPhoneForm"></app-add-phone-form>
+  <app-add-phone-form *ngIf="addPhoneForm" (addPhone)="addPhone($event)"></app-add-phone-form>
   <ng-template [ngIf]="phones">
     <ul *ngFor="let phone of phones">
-      <app-phone-element [phone]="phone"></app-phone-element>
+      <app-phone-element [phone]="phone" (updatePhone)="updatePhone($event)"
+                         (deletePhone)="deletePhone($event)"></app-phone-element>
     </ul>
   </ng-template>
   <ng-template [ngIf]="getAllPhoneErrorMessage">

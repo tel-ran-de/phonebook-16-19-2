@@ -3,7 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from './in-memory-data.service';
 import {AppRoutingModule} from './app-routing.module';
 import {NavigationComponent} from './navigation/navigation.component';
 import {AddContactFormComponent} from './add-contact-form/add-contact-form.component';
@@ -35,9 +34,6 @@ import {PhoneElementComponent} from './contact-details/phone/phone-element/phone
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {dataEncapsulation: false}
-    ),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

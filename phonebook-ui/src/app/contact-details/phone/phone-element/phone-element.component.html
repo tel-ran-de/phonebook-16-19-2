@@ -1,12 +1,7 @@
 <li *ngIf="phone">
-  <form [formGroup]="updatePhoneForm" class="row">
+  <form [formGroup]="updatePhoneForm" class="row" (ngSubmit)="onClickSave()">
     <div class="col-md-1 col-sm-2 col-1">
-      <div class="">
-        <div (click)="toggleStar()"
-             [ngClass]="flag ? 'star-true': 'star-false'"
-             class="star pointer">
-        </div>
-      </div>
+      <input [attr.disabled]="phoneEditFlag ? null : true" class="star" type="checkbox" formControlName="favorite">
     </div>
     <div class="row col-md-7 col-sm-6 col-10 form-group">
       <input [readonly]="!phoneEditFlag" formControlName="countryCode"
@@ -32,7 +27,7 @@
       country code not specified
     </div>
     <div class="alert alert-danger" *ngIf=" updatePhoneForm.controls['telephoneNumber'].invalid &&
-            updatePhoneForm.controls['telephoneNumber'].touched  ">
+            updatePhoneForm.controls['telephoneNumber'].touched">
       telephone number not specified
     </div>
   </div>

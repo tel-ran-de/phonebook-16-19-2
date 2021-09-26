@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PhoneService} from "../service/phone.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Phone} from "../model/phone";
 
 @Component({
   selector: 'app-add-phone-form',
@@ -14,7 +15,8 @@ export class AddPhoneFormComponent implements OnInit {
   phoneForm!: FormGroup;
   logError: String | undefined;
   contactId: number | undefined;
-  flag!: boolean;
+  @Output()
+  addPhone: EventEmitter<Phone> = new EventEmitter<Phone>();
 
   constructor(private phoneService: PhoneService, private route: ActivatedRoute, private router: Router) {
   }
@@ -22,15 +24,15 @@ export class AddPhoneFormComponent implements OnInit {
   ngOnInit(): void {
     this.contactId = Number(this.route.snapshot.paramMap.get('id'));
     this._initFrom();
-    this.flag = false;
   }
 
-  private _initFrom() {
+  private _initFrom(): void {
     this.phoneForm = new FormGroup({
       countryCode: new FormControl('', Validators.required),
       telephoneNumber: new FormControl('', Validators.required),
-      favorite: new FormControl(this.flag),
-      contactId: new FormControl(this.contactId)
+      favorite: new FormControl(false),
+      contactId: new FormControl(this.contactId),
+      id: new FormControl()
     });
   }
 
@@ -40,20 +42,18 @@ export class AddPhoneFormComponent implements OnInit {
       return;
     }
     const addSubscription = this.phoneService.addPhone(this.phoneForm.value)
-      .subscribe(value => this.router.navigate(['contacts', this.contactId]), error => this.logError = error);
+      .subscribe(value => {
+        this.addPhone.emit(this.phoneForm.value);
+      }, error => this.logError = error);
     this.subscription.push(addSubscription);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.forEach(value => value.unsubscribe());
-  }
-
-  toggleStar() {
-    this.flag = !this.flag;
   }
 
   clear() {
     this.phoneForm.reset();
     this.logError = undefined;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(value => value.unsubscribe());
   }
 }
