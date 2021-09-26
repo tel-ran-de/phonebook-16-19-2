@@ -1,0 +1,109 @@
+.edit-picture img{
+  width: 22px;
+  cursor: pointer;
+}
+.edit-picture {
+  align-self: center;
+}
+.edit-picture-phone img {
+  width: 22px;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.container {
+  width: 60%;
+  background-color: #FBF7F0;
+  padding-bottom: 35px;
+}
+.contact-title {
+  padding-bottom: 20px;
+  padding-left: 11px;
+  font-size: 22px;
+}
+
+.form-control[readonly] {
+  background-color: #FBF7F0;
+  border: none;
+}
+
+.address {
+  margin-top: 30px;
+  border-radius: 8px;
+  padding-top: 10px;
+}
+.delete-line {
+  margin-left: 30px;
+}
+.star {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+}
+.star-true {
+  background-image: url("src/assets/images/star.png");
+}
+.star-false {
+  background-image: url("src/assets/images/star_grey.png");
+}
+label {
+  margin-bottom: 10px;
+}
+
+form > div.edit-picture.col-md-1 {
+  position: relative;
+  top: 17px;
+
+}
+.delete-address {
+  width: 22px;
+  padding-top: 40px;
+  cursor: pointer;
+}
+.submit {
+  border: none;
+  background-color: #FBF7F0;
+}
+
+@media (max-width: 767px) {
+  .contact label {
+    display: none;
+  }
+  .phone-img {
+    display: none;
+  }
+  input {
+    font-size: 14px;
+  }
+  form > div.edit-picture.col-md-1 {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .container {
+    font-size: 12px;
+  }
+  .contact label {
+    display: none;
+  }
+  .phone-img {
+    display: none;
+  }
+  .edit-picture img{
+    width: 22px;
+  }
+  .star {
+    width: 30px;
+    height: 30px;
+  }
+  input {
+    font-size: 12px;
+  }
+  .country-city, .street-home {
+    display: flex;
+  }
+}

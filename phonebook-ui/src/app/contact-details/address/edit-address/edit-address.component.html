@@ -1,0 +1,38 @@
+<div class="address">
+  <form [formGroup]="addressForm" class="row" (ngSubmit)="onSubmit()">
+    <div class="col-sm-11">
+      <div class="row">
+        <div (click)="toggleStar()" class="col-md-1 star star-{{address?.isFavorite }}"></div>
+        <div class="col-md-3 col-sm-6  country-city form-group">
+          <input [readonly]="!addressEditFlag" placeholder="country" class=" form-control" formControlName="country">
+        </div>
+        <div class="col-md-4  country-city form-group">
+          <input [readonly]="!addressEditFlag" placeholder="city" class=" form-control" formControlName="city">
+        </div>
+        <div class="col-md-4  form-group street-home">
+          <input [readonly]="!addressEditFlag" placeholder="street" class="form-control" formControlName="street">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3 col-sm-4 col-12 form-group street-home">
+          <input [readonly]="!addressEditFlag" placeholder="index" class="form-control" formControlName="index">
+        </div>
+        <div class="col-md-4 col-sm-4 col-12 form-group street-home">
+          <input [readonly]="!addressEditFlag" placeholder="home number" class="form-control" formControlName="homeNr">
+        </div>
+        <div class="col-md-5"></div>
+      </div>
+    </div>
+    <div class="col-sm-1 col-12">
+      <div class="edit-picture" *ngIf="!addressEditFlag">
+        <img (click)="toggleEditAddress()" [src]="imageEdit" alt="edit">
+      </div>
+      <div class="edit-picture" *ngIf="addressEditFlag">
+        <button [disabled]="addressForm.status=='INVALID'" class="submit" type="submit">
+          <img [src]="imageSave" alt="save">
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
