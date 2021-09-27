@@ -14,6 +14,8 @@ export class ContactsComponent implements OnInit, OnDestroy {
   public contacts: Contact[] | undefined;
   private subscriptions: Subscription[] = [];
 
+  public searchItem = '';
+
 
   public imageDelete = "assets/images/delete.png";
 
@@ -24,6 +26,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
     const getContactsSubscription = this.service.getContacts()
       .subscribe(contacts => this.contacts = contacts);
     this.subscriptions.push(getContactsSubscription);
+
   }
 
   delete(id: number): void {
@@ -35,5 +38,4 @@ export class ContactsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(value => value.unsubscribe())
   }
-
 }
