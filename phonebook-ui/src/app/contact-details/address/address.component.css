@@ -66,6 +66,12 @@ form > div.edit-picture.col-md-1 {
   border: none;
   background-color: #FBF7F0;
 }
+.submit.low-opacity {
+  opacity: 20%;
+}
+.submit.low-opacity img {
+  cursor: initial;
+}
 
 @media (max-width: 767px) {
   .contact label {

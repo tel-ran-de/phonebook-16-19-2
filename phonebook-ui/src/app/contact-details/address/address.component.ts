@@ -58,4 +58,8 @@ export class AddressComponent implements OnInit {
   ngOnDestroy(): void {
     this.subscriptions.forEach(value => value.unsubscribe())
   }
+
+  cancelAddingNewAddress() {
+    this.addingNewAddress = false;
+  }
 }

@@ -29,7 +29,7 @@ export class EditAddressComponent implements OnInit {
       id: new FormControl(this.address?.id),
       country: new FormControl(this.address?.country, Validators.required),
       city: new FormControl(this.address?.city, Validators.required),
-      index: new FormControl(this.address?.index, Validators.required),
+      index: new FormControl(this.address?.index, [Validators.required, Validators.minLength(3)]),
       street: new FormControl(this.address?.street, Validators.required),
       homeNr: new FormControl(this.address?.homeNr, Validators.required),
       isFavorite: new FormControl(this.address?.isFavorite),

@@ -5,21 +5,28 @@
         <div (click)="toggleStar()" class="col-md-1 star star-{{address?.isFavorite }}"></div>
         <div class="col-md-3 col-sm-6  country-city form-group">
           <input [readonly]="!addressEditFlag" placeholder="country" class=" form-control" formControlName="country">
+          <div *ngIf="addressForm.controls.country.hasError('required') && (addressForm.controls.country.dirty || addressForm.controls.country.touched)">This field is required</div>
         </div>
         <div class="col-md-4  country-city form-group">
           <input [readonly]="!addressEditFlag" placeholder="city" class=" form-control" formControlName="city">
+          <div *ngIf="addressForm.controls.city.hasError('required') && (addressForm.controls.city.dirty || addressForm.controls.city.touched)">This field is required</div>
         </div>
         <div class="col-md-4  form-group street-home">
           <input [readonly]="!addressEditFlag" placeholder="street" class="form-control" formControlName="street">
+          <div *ngIf="addressForm.controls.street.hasError('required') && (addressForm.controls.street.dirty || addressForm.controls.street.touched)">This field is required</div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-3 col-sm-4 col-12 form-group street-home">
           <input [readonly]="!addressEditFlag" placeholder="index" class="form-control" formControlName="index">
+          <div *ngIf="addressForm.controls.index.hasError('required') && (addressForm.controls.index.dirty || addressForm.controls.index.touched)">This field is required</div>
+          <div *ngIf="addressForm.controls.index.hasError('minlength') && (addressForm.controls.index.dirty || addressForm.controls.index.touched)">Min length of the field is 3 characters</div>
         </div>
         <div class="col-md-4 col-sm-4 col-12 form-group street-home">
           <input [readonly]="!addressEditFlag" placeholder="home number" class="form-control" formControlName="homeNr">
+          <div *ngIf="addressForm.controls.homeNr.hasError('required') && (addressForm.controls.homeNr.dirty || addressForm.controls.homeNr.touched)">This field is required</div>
+
         </div>
         <div class="col-md-5"></div>
       </div>
@@ -29,7 +36,7 @@
         <img (click)="toggleEditAddress()" [src]="imageEdit" alt="edit">
       </div>
       <div class="edit-picture" *ngIf="addressEditFlag">
-        <button [disabled]="addressForm.status=='INVALID'" class="submit" type="submit">
+        <button [ngClass]="{'low-opacity': addressForm.invalid}" [disabled]="addressForm.invalid"class="submit" type="submit">
           <img [src]="imageSave" alt="save">
         </button>
       </div>
