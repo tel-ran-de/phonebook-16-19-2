@@ -28,7 +28,7 @@ export class PhoneComponent implements OnInit, OnDestroy {
     this.getAllPhoneErrorMessage = undefined;
     const contactId: number = Number(this.route.snapshot.paramMap.get('id'));
     const getPhonesSubscription = this.phoneService.getPhones(contactId).subscribe(value => this.phones = value
-      .sort((a, b) => Number(b.isFavorite) - Number(a.isFavorite)), error => this.callBackError(error));
+      .sort((a, b) => Number(b.favorite) - Number(a.favorite)), error => this.callBackError(error));
     this.subscriptions.push(getPhonesSubscription);
   }
 
@@ -69,6 +69,6 @@ export class PhoneComponent implements OnInit, OnDestroy {
   }
 
   sortPhones(): void {
-    this.phones.sort((a, b) => Number(b.isFavorite) - Number(a.isFavorite));
+    this.phones.sort((a, b) => Number(b.favorite) - Number(a.favorite));
   }
 }

@@ -7,7 +7,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   providedIn: 'root'
 })
 export class PhoneService {
-  private readonly phoneUrl = '/api/phone';
+  private readonly phoneUrl = 'api/phone';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -19,7 +19,7 @@ export class PhoneService {
   }
 
   getPhones(contactId: number): Observable<Phone[]> {
-    const url = `${this.phoneUrl}?contactId=${contactId}`;
+    const url = `${this.phoneUrl}/${contactId}/all`;
     return this.httpClient.get<Phone[]>(url);
   }
 
@@ -31,9 +31,10 @@ export class PhoneService {
     const url = `${this.phoneUrl}/${id}`;
     return this.httpClient.delete<Phone>(url, this.httpOptions);
   }
-  updatePhone( phone:Phone):Observable<any>{
-    const url=`${this.phoneUrl}/${phone.id}`;
-    return this.httpClient.put(url,phone,this.httpOptions);
+
+  updatePhone(phone: Phone): Observable<any> {
+    const url = `${this.phoneUrl}/${phone.id}`;
+    return this.httpClient.put(url, phone, this.httpOptions);
   }
 
 }

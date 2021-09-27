@@ -37,7 +37,7 @@ export class PhoneElementComponent implements OnInit, OnDestroy {
     this.updatePhoneForm = new FormGroup({
       countryCode: new FormControl(this.phone?.countryCode, Validators.required),
       telephoneNumber: new FormControl(this.phone?.telephoneNumber, Validators.required),
-      favorite: new FormControl(this.phone?.isFavorite),
+      favorite: new FormControl(this.phone?.favorite),
       contactId: new FormControl(this.contactId),
       id: new FormControl(this.phone?.id)
     });

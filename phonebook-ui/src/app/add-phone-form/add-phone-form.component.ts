@@ -43,7 +43,7 @@ export class AddPhoneFormComponent implements OnInit {
     }
     const addSubscription = this.phoneService.addPhone(this.phoneForm.value)
       .subscribe(value => {
-        this.addPhone.emit(this.phoneForm.value);
+        this.addPhone.emit(value);
       }, error => this.logError = error);
     this.subscription.push(addSubscription);
   }
