@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class PhoneMapper {
     public CreatePhoneResponse phoneToRegisterPhoneResponse(Phone phone) {
-        return new CreatePhoneResponse(phone.getId(), phone.getCountryCode(), phone.getTelephoneNumber());
+        return new CreatePhoneResponse(phone.getId(), phone.getCountryCode(), phone.getTelephoneNumber(), phone.isFavorite());
     }
 }

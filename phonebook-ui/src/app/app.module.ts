@@ -12,6 +12,10 @@ import {PhoneComponent} from './contact-details/phone/phone.component';
 import {EmailComponent} from './contact-details/email/email.component';
 import {AddressComponent} from './contact-details/address/address.component';
 import {ContactComponent} from './contact-details/contact/contact.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AddPhoneFormComponent} from './add-phone-form/add-phone-form.component';
+import {PhoneElementComponent} from './contact-details/phone/phone-element/phone-element.component';
+import {SortPhonesByFavoritePipe} from './contact-details/sort-by-favorite-phone.pipe';
 import {EmailElementComponent} from './contact-details/email/emeail-element/email-element.component';
 import {ContactsComponent} from './contacts/contacts.component';
 import {ContactSearch} from "./contacts/contact.search";
@@ -27,6 +31,9 @@ import {ContactSearch} from "./contacts/contact.search";
     EmailComponent,
     AddressComponent,
     ContactComponent,
+    AddPhoneFormComponent,
+    PhoneElementComponent,
+    SortPhonesByFavoritePipe
     ContactsComponent,
     EmailElementComponent,
     ContactSearch,
