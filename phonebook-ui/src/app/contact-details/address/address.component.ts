@@ -34,7 +34,7 @@ export class AddressComponent implements OnInit {
   }
 
   toggleStar() {
-    console.log("clickStar", this.phone?.isFavorite)
+    console.log("clickStar", this.phone?.favorite)
   }
 
 }

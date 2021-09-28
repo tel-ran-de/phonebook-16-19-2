@@ -33,7 +33,7 @@ import {ContactSearch} from "./contacts/contact.search";
     ContactComponent,
     AddPhoneFormComponent,
     PhoneElementComponent,
-    SortPhonesByFavoritePipe
+    SortPhonesByFavoritePipe,
     ContactsComponent,
     EmailElementComponent,
     ContactSearch,
