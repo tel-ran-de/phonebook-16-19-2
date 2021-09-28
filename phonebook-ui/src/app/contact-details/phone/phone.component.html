@@ -8,7 +8,7 @@
   </div>
   <app-add-phone-form *ngIf="addPhoneForm" (addPhone)="addPhone($event)"></app-add-phone-form>
   <ng-template [ngIf]="phones">
-    <ul *ngFor="let phone of phones">
+    <ul *ngFor="let phone of phones | sortPhonesByFavorite">
       <app-phone-element [phone]="phone" (updatePhone)="updatePhone($event)"
                          (deletePhone)="deletePhone($event)"></app-phone-element>
     </ul>

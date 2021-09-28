@@ -1,8 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PhoneService} from "../service/phone.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Phone} from "../model/phone";
 
 @Component({
@@ -10,7 +10,7 @@ import {Phone} from "../model/phone";
   templateUrl: './add-phone-form.component.html',
   styleUrls: ['./add-phone-form.component.css', '../contact-details/contact-details.component.css']
 })
-export class AddPhoneFormComponent implements OnInit {
+export class AddPhoneFormComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   phoneForm!: FormGroup;
   logError: String | undefined;
@@ -18,7 +18,7 @@ export class AddPhoneFormComponent implements OnInit {
   @Output()
   addPhone: EventEmitter<Phone> = new EventEmitter<Phone>();
 
-  constructor(private phoneService: PhoneService, private route: ActivatedRoute, private router: Router) {
+  constructor(private phoneService: PhoneService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -42,13 +42,12 @@ export class AddPhoneFormComponent implements OnInit {
       return;
     }
     const addSubscription = this.phoneService.addPhone(this.phoneForm.value)
-      .subscribe(value => {
-        this.addPhone.emit(value);
-      }, error => this.logError = error);
+      .subscribe(value => this.addPhone.emit(value),
+        error => this.logError = error);
     this.subscription.push(addSubscription);
   }
 
-  clear() {
+  clear(): void {
     this.phoneForm.reset();
     this.logError = undefined;
   }

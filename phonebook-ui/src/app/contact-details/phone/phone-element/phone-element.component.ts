@@ -2,8 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {Phone} from "../../../model/phone";
 import {Subscription} from "rxjs";
 import {PhoneService} from "../../../service/phone.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {HttpErrorResponse} from "@angular/common/http";
+import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -13,7 +12,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class PhoneElementComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
-  getAllPhoneErrorMessage: string | undefined;
   phoneEditFlag = false;
   contactId: number | undefined;
   updatePhoneForm!: FormGroup;
@@ -25,7 +23,7 @@ export class PhoneElementComponent implements OnInit, OnDestroy {
   @Output()
   deletePhone: EventEmitter<Phone> = new EventEmitter<Phone>();
 
-  constructor(private phoneService: PhoneService, private route: ActivatedRoute, private router: Router) {
+  constructor(private phoneService: PhoneService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -43,10 +41,6 @@ export class PhoneElementComponent implements OnInit, OnDestroy {
     });
   }
 
-  private callBackError(error: HttpErrorResponse): void {
-    this.getAllPhoneErrorMessage = "Error";
-  }
-
   onClickSave() {
     if (this.updatePhoneForm.invalid) {
       this.logError = "The phone form is invalid";
@@ -57,22 +51,15 @@ export class PhoneElementComponent implements OnInit, OnDestroy {
       return;
     }
     const addSubscription = this.phoneService.updatePhone(this.updatePhoneForm.value)
-      .subscribe(value => {
-        this.updatePhone.emit(this.updatePhoneForm.value);
-      }, error => this.logError = error);
+      .subscribe(_ => this.updatePhone.emit(this.updatePhoneForm.value), error => this.logError = error);
     this.subscriptions.push(addSubscription);
     this.phoneEditFlag = false;
   }
 
-  onClickDelete(phone: Phone) {
-    const addSubscription = this.phoneService.deletePhone(phone.id).subscribe(value => {
-      this.deletePhone.emit(this.phone);
-    }, error => this.logError = error);
+  onClickDelete(phone: Phone): void {
+    const addSubscription = this.phoneService.deletePhone(phone.id).subscribe(_ =>
+      this.deletePhone.emit(this.phone), error => this.logError = error);
     this.subscriptions.push(addSubscription);
-  }
-
-  toggleEditPhone() {
-    this.phoneEditFlag = !this.phoneEditFlag;
   }
 
   ngOnDestroy(): void {

@@ -27,17 +27,16 @@ export class PhoneComponent implements OnInit, OnDestroy {
   getPhones(): void {
     this.getAllPhoneErrorMessage = undefined;
     const contactId: number = Number(this.route.snapshot.paramMap.get('id'));
-    const getPhonesSubscription = this.phoneService.getPhones(contactId).subscribe(value => this.phones = value
-      .sort((a, b) => Number(b.favorite) - Number(a.favorite)), error => this.callBackError(error));
+    const getPhonesSubscription = this.phoneService.getPhones(contactId).subscribe(value => this.phones = value, error => this.callBackError(error));
     this.subscriptions.push(getPhonesSubscription);
   }
 
   private callBackError(error: HttpErrorResponse): void {
-    this.getAllPhoneErrorMessage = "Error";
+    this.getAllPhoneErrorMessage = "Error" + error;
   }
 
 
-  toggleAddForm() {
+  toggleAddForm(): void {
     this.addPhoneForm = !this.addPhoneForm;
     this.phoneAddFlag = !this.phoneAddFlag;
   }
@@ -45,7 +44,6 @@ export class PhoneComponent implements OnInit, OnDestroy {
   addPhone($event: Phone): void {
     this.phones.push($event);
     this.toggleAddForm();
-    this.sortPhones();
   }
 
   updatePhone($event: Phone): void {
@@ -54,13 +52,11 @@ export class PhoneComponent implements OnInit, OnDestroy {
         value = $event;
       }
     });
-    this.sortPhones();
   }
 
   deletePhone($event: Phone): void {
     let deleteIndex = this.phones.indexOf($event);
     this.phones.splice(deleteIndex, 1);
-    this.sortPhones();
   }
 
   ngOnDestroy(): void {
@@ -68,7 +64,4 @@ export class PhoneComponent implements OnInit, OnDestroy {
       .forEach(subscriptions => subscriptions.unsubscribe());
   }
 
-  sortPhones(): void {
-    this.phones.sort((a, b) => Number(b.favorite) - Number(a.favorite));
-  }
 }

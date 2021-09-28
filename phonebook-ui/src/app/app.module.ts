@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {AppRoutingModule} from './app-routing.module';
 import {NavigationComponent} from './navigation/navigation.component';
 import {AddContactFormComponent} from './add-contact-form/add-contact-form.component';
@@ -16,6 +15,7 @@ import {ContactComponent} from './contact-details/contact/contact.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AddPhoneFormComponent} from './add-phone-form/add-phone-form.component';
 import {PhoneElementComponent} from './contact-details/phone/phone-element/phone-element.component';
+import {SortPhonesByFavoritePipe} from './contact-details/sort-by-favorite-phone.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import {PhoneElementComponent} from './contact-details/phone/phone-element/phone
     AddressComponent,
     ContactComponent,
     AddPhoneFormComponent,
-    PhoneElementComponent
+    PhoneElementComponent,
+    SortPhonesByFavoritePipe
   ],
   imports: [
     BrowserModule,
