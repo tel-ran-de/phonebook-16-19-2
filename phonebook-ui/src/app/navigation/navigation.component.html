@@ -1,9 +1,9 @@
 <header>
   <img src="assets/phone-black.png" alt="phone-logo">
   <nav>
-    <a routerLink="#">Contacts</a>
-    <a routerLink="#">Account</a>
-    <a routerLink="#">Logout</a>
+    <a [routerLink]="['contacts']">Contacts</a>
+    <a [routerLink]="['.']">Account</a>
+    <a [routerLink]="['.']">Logout</a>
   </nav>
-  <button routerLink="contacts/add-form">add new Contact</button>
+  <button [routerLink]="['contacts','add-form']">add new Contact</button>
 </header>

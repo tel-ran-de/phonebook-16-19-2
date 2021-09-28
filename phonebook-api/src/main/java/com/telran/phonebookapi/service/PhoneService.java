@@ -20,10 +20,10 @@ public class PhoneService {
         this.contactRepository = contactRepository;
     }
 
-    public Phone add(String countryCode, String telephoneNumber, boolean isFavorite, Long contactId) {
+    public Phone add(String countryCode, String telephoneNumber, boolean favorite, Long contactId) {
         Contact contact = contactRepository.findById(contactId)
                 .orElseThrow(() -> new ContactNotFoundException("Contact with id " + contactId + " doesn't exist"));
-        Phone phone = new Phone(countryCode, telephoneNumber, isFavorite, contact);
+        Phone phone = new Phone(countryCode, telephoneNumber, favorite, contact);
         contact.addPhone(phone);
         return phoneRepository.save(phone);
     }
@@ -45,14 +45,14 @@ public class PhoneService {
         return contact.getPhones();
     }
 
-    public void edit(Long id, String countryCode, String telephoneNumber, boolean isFavorite) {
+    public void edit(Long id, String countryCode, String telephoneNumber, boolean favorite) {
         Phone phone = phoneRepository.findById(id)
                 .orElseThrow(() -> new PhoneNotFoundException("Phone with id: " + id + " not found"));
         if (countryCode != null)
             phone.setCountryCode(countryCode);
         if (telephoneNumber != null)
             phone.setTelephoneNumber(telephoneNumber);
-        phone.setFavorite(isFavorite);
+        phone.setFavorite(favorite);
         phoneRepository.save(phone);
     }
 
