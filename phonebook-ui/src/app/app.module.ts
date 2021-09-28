@@ -16,6 +16,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AddPhoneFormComponent} from './add-phone-form/add-phone-form.component';
 import {PhoneElementComponent} from './contact-details/phone/phone-element/phone-element.component';
 import {SortPhonesByFavoritePipe} from './contact-details/sort-by-favorite-phone.pipe';
+import {EmailElementComponent} from './contact-details/email/emeail-element/email-element.component';
+import {ContactsComponent} from './contacts/contacts.component';
+import {ContactSearch} from "./contacts/contact.search";
 
 @NgModule({
   declarations: [
@@ -31,14 +34,16 @@ import {SortPhonesByFavoritePipe} from './contact-details/sort-by-favorite-phone
     AddPhoneFormComponent,
     PhoneElementComponent,
     SortPhonesByFavoritePipe
+    ContactsComponent,
+    EmailElementComponent,
+    ContactSearch,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgbModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

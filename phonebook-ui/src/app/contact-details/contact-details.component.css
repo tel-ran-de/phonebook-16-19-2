@@ -54,6 +54,10 @@ form > div.edit-picture.col-md-1 {
   position: relative;
   top: 17px;
 }
+.error-message {
+  color: red;
+  padding-left: 20px;
+}
 
 @media (max-width: 767px) {
   .contact label {

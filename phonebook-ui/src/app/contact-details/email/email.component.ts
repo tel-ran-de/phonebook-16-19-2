@@ -1,32 +1,44 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Email} from "../../model/email";
+import {EmailService} from "../../service/email.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-email',
   templateUrl: './email.component.html',
-  styleUrls: ['../contact-details.component.css']
+  styleUrls: ['../contact-details.component.css', './email.component.css']
 })
-export class EmailComponent implements OnInit {
-  public email: Email | undefined;
-  public emailEditFlag = false;
+export class EmailComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  emails: Email[] | undefined;
+  private subscriptions: Subscription[] = [];
+
+  getAllEmailErrorMessage: string | undefined;
+
+  constructor(private emailService: EmailService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.email = {
-      id: 1,
-      email: "vasya@email.com",
-      isFavorite: false,
-      contactId: 1
-    }
+    this.getEmails();
   }
 
-  toggleEditEmail() {
-    this.emailEditFlag = !this.emailEditFlag;
+  private getEmails(): void {
+    this.getAllEmailErrorMessage = undefined;
+    const contactId: number = Number(this.route.snapshot.paramMap.get('id'));
+
+    const getEmailsSubscription = this.emailService.getEmails(contactId)
+      .subscribe(value => this.emails = value, error => this.callBackError(error));
+    this.subscriptions.push(getEmailsSubscription);
   }
 
-  toggleStar() {
-    console.log("clickStar", this.email?.isFavorite)
+  private callBackError(error: HttpErrorResponse): void {
+    this.getAllEmailErrorMessage = "Error";
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions
+      .forEach(subscriptions => subscriptions.unsubscribe());
   }
 }
