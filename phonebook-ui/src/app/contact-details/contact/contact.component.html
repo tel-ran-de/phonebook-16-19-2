@@ -9,12 +9,12 @@
     </div>
     <div class="col-md-3 col-sm-4 col-6 form-group">
       <label>First Name</label>
-      <input [readonly]="!contactEditFlag" name="firstName" class="form-control" [(ngModel)]="contact.firstName">
+      <input *ngIf="contactToDisplay" [readonly]="!contactEditFlag" name="firstName" class="form-control" [(ngModel)]="contactToDisplay.firstName">
     </div>
 
     <div class="col-md-3 col-sm-3 col-6 form-group">
       <label>Last Name</label>
-      <input [readonly]="!contactEditFlag" name="lastName" class="form-control" [(ngModel)]="contact.lastName">
+      <input *ngIf="contactToDisplay" [readonly]="!contactEditFlag" name="lastName" class="form-control" [(ngModel)]="contactToDisplay.lastName">
 
     </div>
     <div class="col-sm-1 col-md-1 edit-picture" *ngIf="!contactEditFlag">
@@ -23,5 +23,7 @@
     <div class="col-sm-1 col-md-1 edit-picture" *ngIf="contactEditFlag">
       <img (click)="updateContact()" [src]="imageSave" alt="save">
     </div>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
   </form>
 </div>
