@@ -1,12 +1,7 @@
 <div class="container contact" *ngIf="contact">
   <div class="row contact-title">Contact</div>
   <form class="row">
-    <div class="col-md-2 icon">
-      <label>Icon</label>
-      <div class="col-md-2 col-sm-4 edit-picture-phone">
-        <img src="" alt="none">
-      </div>
-    </div>
+    <div class="col-md-1 "></div>
     <div class="col-md-3 col-sm-4 col-6 form-group">
       <label>First Name</label>
       <input *ngIf="contactToDisplay" [readonly]="!contactEditFlag" name="firstName" class="form-control" [(ngModel)]="contactToDisplay.firstName">
@@ -15,8 +10,12 @@
     <div class="col-md-3 col-sm-3 col-6 form-group">
       <label>Last Name</label>
       <input *ngIf="contactToDisplay" [readonly]="!contactEditFlag" name="lastName" class="form-control" [(ngModel)]="contactToDisplay.lastName">
-
     </div>
+    <div class="col-md-3 col-sm-3 col-6 form-group">
+      <label>Age</label>
+      <input *ngIf="contactToDisplay" [readonly]="!contactEditFlag" name="age" class="form-control" [(ngModel)]="contactToDisplay.age">
+    </div>
+
     <div class="col-sm-1 col-md-1 edit-picture" *ngIf="!contactEditFlag">
       <img (click)="toggleEditContact()" [src]="imageEdit" alt="edit">
     </div>
