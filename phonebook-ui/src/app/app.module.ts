@@ -12,7 +12,7 @@ import {PhoneComponent} from './contact-details/phone/phone.component';
 import {EmailComponent} from './contact-details/email/email.component';
 import {AddressComponent} from './contact-details/address/address.component';
 import {ContactComponent} from './contact-details/contact/contact.component';
-import {EmailElementComponent} from './contact-details/email/emeail-element/email-element.component';
+import {EmailElementComponent} from './contact-details/email/email-element/email-element.component';
 import {ContactsComponent} from './contacts/contacts.component';
 import {ContactSearch} from "./contacts/contact.search";
 

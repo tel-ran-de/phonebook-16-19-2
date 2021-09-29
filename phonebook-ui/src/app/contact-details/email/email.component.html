@@ -1,19 +1,23 @@
 <div class="container email">
   <div class="row">
     <div class="col-md-11 col-sm-10 col-10 contact-title">Email</div>
-    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone"><img src="assets/images/plus.png" alt="add"></div>
+    <div class="col-md-1 col-sm-2 col-2 edit-picture-phone">
+      <img (click)="addEmail()" *ngIf="!addNewEmail" src="assets/images/plus.png">
+      <img (click)="cancelEmail()" *ngIf="addNewEmail" src="assets/images/delete.png">
+    </div>
   </div>
 
-  <ng-template [ngIf]="emails">
-    <app-email-element
-      *ngFor="let email of emails" [email]="email"></app-email-element>
-  </ng-template>
+  <app-email-element *ngIf="addNewEmail" [emailEditFlag]="addNewEmail"
+                     (EmailChanged)="updateEmail($event)"></app-email-element>
+  <div *ngFor="let email of emails">
+    <div class="row">
+      <div class="col-md-11">
+        <app-email-element [email]="email" (EmailChanged)="updateEmail($event)"></app-email-element>
+      </div>
+      <div class="col-md-1">
+        <img (click)="deleteEmail(email)" class="delete-email" src="assets/images/delete.png">
+      </div>
+    </div>
 
-  <ng-template [ngIf]="getAllEmailErrorMessage">
-    <div class="alert alert-danger">{{getAllEmailErrorMessage}}</div>
-  </ng-template>
-
-  <ng-template [ngIf]="!emails && !getAllEmailErrorMessage">
-    <p>Loading...</p>
-  </ng-template>
+  </div>
 </div>

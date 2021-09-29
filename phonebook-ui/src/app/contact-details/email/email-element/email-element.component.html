@@ -1,0 +1,27 @@
+<div>
+  <form [formGroup]="emailForm" class="row" (ngSubmit)="onSubmit()">
+    <div class="col-md-1 col-sm-1">
+      <div (click)="!emailEditFlag || toggleStar()" class="star star-{{ (email?.isFavorite) || false }}"></div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-6">
+      <input [readOnly]="!emailEditFlag" placeholder="email" class="form-control" formControlName="email">
+      <div class="alert alert-danger"
+           *ngIf="emailForm.controls.email.hasError('pattern') && (emailForm.controls.email.dirty || emailForm.controls.email.touched)">
+        The email is INCORRECT
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-4">
+    </div>
+    <div class="col-md-1 col-sm-1 col-1">
+      <div class="edit-picture" *ngIf="!emailEditFlag">
+        <img (click)="toggleEditEmail()" [src]="imageEdit" alt="edit">
+      </div>
+      <div class="edit-picture" *ngIf="emailEditFlag">
+        <button [ngClass]="{'low-opacity': emailForm.invalid}" [disabled]="emailForm.invalid" class="submit"
+                type="submit">
+          <img [src]="imageSave" alt="save">
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
