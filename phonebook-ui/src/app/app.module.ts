@@ -19,6 +19,7 @@ import {SortPhonesByFavoritePipe} from './contact-details/sort-by-favorite-phone
 import {EmailElementComponent} from './contact-details/email/emeail-element/email-element.component';
 import {ContactsComponent} from './contacts/contacts.component';
 import {ContactSearch} from "./contacts/contact.search";
+import {EditAddressComponent} from './contact-details/address/edit-address/edit-address.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {ContactSearch} from "./contacts/contact.search";
     ContactsComponent,
     EmailElementComponent,
     ContactSearch,
+    EditAddressComponent,
   ],
   imports: [
     BrowserModule,
