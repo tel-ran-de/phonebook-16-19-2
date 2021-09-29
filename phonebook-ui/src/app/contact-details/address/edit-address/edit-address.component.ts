@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 import {Address} from "../../../model/address";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EventEmitter} from '@angular/core';
+import {Validator} from "../../../shared/validator";
 
 @Component({
   selector: 'app-edit-address',
@@ -27,11 +28,11 @@ export class EditAddressComponent implements OnInit {
   ngOnInit(): void {
     this.addressForm = new FormGroup({
       id: new FormControl(this.address?.id),
-      country: new FormControl(this.address?.country, [Validators.required, this.noWhitespaceValidator]),
-      city: new FormControl(this.address?.city, [Validators.required, this.noWhitespaceValidator]),
-      index: new FormControl(this.address?.index, [Validators.required, Validators.minLength(3), this.noWhitespaceValidator]),
-      street: new FormControl(this.address?.street, [Validators.required, this.noWhitespaceValidator]),
-      homeNr: new FormControl(this.address?.homeNr, [Validators.required, this.noWhitespaceValidator]),
+      country: new FormControl(this.address?.country, [Validators.required, Validator.noWhitespaceValidator]),
+      city: new FormControl(this.address?.city, [Validators.required, Validator.noWhitespaceValidator]),
+      index: new FormControl(this.address?.index, [Validators.required, Validators.minLength(3), Validator.noWhitespaceValidator]),
+      street: new FormControl(this.address?.street, [Validators.required, Validator.noWhitespaceValidator]),
+      homeNr: new FormControl(this.address?.homeNr, [Validators.required, Validator.noWhitespaceValidator]),
       isFavorite: new FormControl(this.address?.isFavorite),
       contactId: new FormControl(this.address?.contactId)
     })
@@ -49,13 +50,5 @@ export class EditAddressComponent implements OnInit {
   onSubmit() {
     this.addressChanged.emit(this.addressForm.value);
     this.addressEditFlag = !this.addressEditFlag;
-  }
-  public noWhitespaceValidator(control: FormControl) {
-    if (control.pristine || !control.touched) {
-      return null;
-    }
-    const isWhitespace = (control.value || '').trim().length === 0;
-    const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
   }
 }
