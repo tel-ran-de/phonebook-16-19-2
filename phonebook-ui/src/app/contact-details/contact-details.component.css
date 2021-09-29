@@ -25,7 +25,7 @@
   border: none;
 }
 
-.contact, .phone, .email, .address {
+.contact, .phone, .email {
   margin-top: 30px;
   border-radius: 8px;
   padding-top: 10px;
@@ -94,8 +94,5 @@ form > div.edit-picture.col-md-1 {
   }
   input {
     font-size: 12px;
-  }
-  .contry-city, .street-home {
-    display: flex;
   }
 }
