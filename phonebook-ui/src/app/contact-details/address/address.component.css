@@ -72,6 +72,9 @@ form > div.edit-picture.col-md-1 {
 .submit.low-opacity img {
   cursor: initial;
 }
+.error-message {
+  margin-top: 10px;
+}
 
 @media (max-width: 767px) {
   .contact label {

@@ -27,11 +27,11 @@ export class EditAddressComponent implements OnInit {
   ngOnInit(): void {
     this.addressForm = new FormGroup({
       id: new FormControl(this.address?.id),
-      country: new FormControl(this.address?.country, Validators.required),
-      city: new FormControl(this.address?.city, Validators.required),
-      index: new FormControl(this.address?.index, [Validators.required, Validators.minLength(3)]),
-      street: new FormControl(this.address?.street, Validators.required),
-      homeNr: new FormControl(this.address?.homeNr, Validators.required),
+      country: new FormControl(this.address?.country, [Validators.required, this.noWhitespaceValidator]),
+      city: new FormControl(this.address?.city, [Validators.required, this.noWhitespaceValidator]),
+      index: new FormControl(this.address?.index, [Validators.required, Validators.minLength(3), this.noWhitespaceValidator]),
+      street: new FormControl(this.address?.street, [Validators.required, this.noWhitespaceValidator]),
+      homeNr: new FormControl(this.address?.homeNr, [Validators.required, this.noWhitespaceValidator]),
       isFavorite: new FormControl(this.address?.isFavorite),
       contactId: new FormControl(this.address?.contactId)
     })
@@ -49,5 +49,13 @@ export class EditAddressComponent implements OnInit {
   onSubmit() {
     this.addressChanged.emit(this.addressForm.value);
     this.addressEditFlag = !this.addressEditFlag;
+  }
+  public noWhitespaceValidator(control: FormControl) {
+    if (control.pristine || !control.touched) {
+      return null;
+    }
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
   }
 }
