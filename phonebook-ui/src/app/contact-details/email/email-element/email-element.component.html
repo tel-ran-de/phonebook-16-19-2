@@ -1,7 +1,7 @@
 <div>
   <form [formGroup]="emailForm" class="row" (ngSubmit)="onSubmit()">
     <div class="col-md-1 col-sm-1">
-      <div (click)="!emailEditFlag || toggleStar()" class="star star-{{ (email?.isFavorite) || false }}"></div>
+      <div (click)="!emailEditFlag || toggleStar()" class="star star-{{ (email?.favorite) || false }}"></div>
     </div>
     <div class="col-md-6 col-sm-6 col-6">
       <input [readOnly]="!emailEditFlag" placeholder="email" class="form-control" formControlName="email">

@@ -31,7 +31,7 @@ export class EmailElementComponent implements OnInit, OnDestroy {
       id: new FormControl(this.email?.id),
       email: new FormControl(this.email?.email, [Validators.required,
         Validators.pattern("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,10}$")]),
-      isFavorite: new FormControl(this.email?.isFavorite),
+      isFavorite: new FormControl(this.email?.favorite),
       contactId: new FormControl(this.email?.contactId)
 
     })
@@ -42,8 +42,8 @@ export class EmailElementComponent implements OnInit, OnDestroy {
   }
 
   toggleStar() {
-    this.email.isFavorite = !this.email.isFavorite;
-    this.emailForm.get("isFavorite")?.setValue(this.email.isFavorite);
+    this.email.favorite = !this.email.favorite;
+    this.emailForm.get("isFavorite")?.setValue(this.email.favorite);
   }
 
   onSubmit() {

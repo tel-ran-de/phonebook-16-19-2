@@ -16,9 +16,9 @@ import {ContactsComponent} from './contacts/contacts.component';
 import {AddPhoneFormComponent} from './add-phone-form/add-phone-form.component';
 import {PhoneElementComponent} from './contact-details/phone/phone-element/phone-element.component';
 import {SortPhonesByFavoritePipe} from './contact-details/sort-by-favorite-phone.pipe';
-import {EmailElementComponent} from './contact-details/email/emeail-element/email-element.component';
 import {ContactSearch} from "./contacts/contact.search";
 import {EditAddressComponent} from './contact-details/address/edit-address/edit-address.component';
+import {EmailElementComponent} from "./contact-details/email/email-element/email-element.component";
 
 @NgModule({
     declarations: [
