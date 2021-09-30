@@ -1,6 +1,7 @@
 package com.telran.phonebookapi.controller;
 
 import com.telran.phonebookapi.dto.ErrorDto;
+import com.telran.phonebookapi.exception.AddressNotFoundException;
 import com.telran.phonebookapi.exception.ContactNotFoundException;
 import com.telran.phonebookapi.exception.EmailNotFoundException;
 import com.telran.phonebookapi.exception.PhoneNotFoundException;
@@ -36,6 +37,13 @@ public class ExceptionHandlerController {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorDto handlePhoneNotFoundException(PhoneNotFoundException e) {
+        return new ErrorDto(e.getMessage());
+    }
+
+    @ExceptionHandler(AddressNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorDto handlerAddressNotFoundException(AddressNotFoundException e) {
         return new ErrorDto(e.getMessage());
     }
 
