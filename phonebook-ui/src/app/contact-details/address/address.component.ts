@@ -1,40 +1,65 @@
 import {Component, OnInit} from '@angular/core';
-import {Phone} from "../../model/phone";
 import {Address} from "../../model/address";
+import {Subscription} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {AddressService} from "../../service/address.service";
 
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
-  styleUrls: ['../contact-details.component.css']
+  styleUrls: ['./address.component.css']
 })
 export class AddressComponent implements OnInit {
-  public addressEditFlag = false;
-  public phone: Phone | undefined;
-  public address: Address | undefined;
+  private subscriptions: Subscription[] = [];
+  private contactId: number;
+  public addingNewAddress = false;
 
-  constructor() {
+  public addresses: Address[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private addressService: AddressService
+  ) {
+    this.contactId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
-    this.address = {
-      id: 1,
-      country: "France",
-      city: "Paris",
-      index: "123456",
-      street: "Some Street",
-      homeNr: 12,
-      isFavorite: true,
-      contactId: 1
+    this.getAddresses();
+  }
+
+  getAddresses() {
+    const getAddressesSubscription = this.addressService.getAddresses(this.contactId)
+      .subscribe(addresses => this.addresses = addresses);
+    this.subscriptions.push(getAddressesSubscription);
+  }
+
+  onAddressChange(address: Address) {
+    if(address.id != null) {
+      this.subscriptions.push(this.addressService.updateAddress(address)
+        .subscribe())
+    } else {
+      address.contactId = this.contactId;
+      this.subscriptions.push(this.addressService.addAddress(address)
+        .subscribe(_ => {
+          this.addingNewAddress = false;
+          this.getAddresses();
+        }));
     }
-
+  }
+  addNewAddress() {
+    this.addingNewAddress = true;
   }
 
-  toggleEditAddress() {
-    this.addressEditFlag = !this.addressEditFlag;
+  deleteAddress(address: Address) {
+    if (address.id != null) {
+      this.addressService.deleteAddress(address.id).subscribe(_ => this.getAddresses());
+    }
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(value => value.unsubscribe())
   }
 
-  toggleStar() {
-    console.log("clickStar", this.phone?.isFavorite)
+  cancelAddingNewAddress() {
+    this.addingNewAddress = false;
   }
-
 }

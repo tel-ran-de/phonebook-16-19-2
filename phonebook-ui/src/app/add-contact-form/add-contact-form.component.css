@@ -39,3 +39,14 @@ input.ng-touched.ng-valid {
 .validation-message * {
   margin-left: 5px;
 }
+
+.button {
+  width: 100%;
+  background-color: #EFEFEF;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid black;
+  box-shadow: darkgray 3px 3px 3px;
+  margin-top: 5px;
+}

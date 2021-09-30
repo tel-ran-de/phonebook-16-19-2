@@ -17,15 +17,15 @@ public class Phone {
     @Setter
     private String telephoneNumber;
     @Setter
-    private boolean isFavorite;
+    private boolean favorite;
 
     @ManyToOne
     private Contact contact;
 
-    public Phone(@NonNull String countryCode, @NonNull String telephoneNumber, boolean isFavorite, @NonNull Contact contact) {
+    public Phone(@NonNull String countryCode, @NonNull String telephoneNumber, boolean favorite, @NonNull Contact contact) {
         this.countryCode = countryCode;
         this.telephoneNumber = telephoneNumber;
-        this.isFavorite = isFavorite;
+        this.favorite = favorite;
         this.contact = contact;
     }
 

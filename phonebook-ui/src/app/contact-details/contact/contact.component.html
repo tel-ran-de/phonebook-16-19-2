@@ -1,27 +1,53 @@
 <div class="container contact" *ngIf="contact">
   <div class="row contact-title">Contact</div>
-  <form class="row">
-    <div class="col-md-2 icon">
-      <label>Icon</label>
-      <div class="col-md-2 col-sm-4 edit-picture-phone">
-        <img src="" alt="none">
-      </div>
-    </div>
+  <form [formGroup]="contactForm" class="row" (ngSubmit)="updateContact()">
+    <div class="col-md-1 "></div>
     <div class="col-md-3 col-sm-4 col-6 form-group">
       <label>First Name</label>
-      <input [readonly]="!contactEditFlag" name="firstName" class="form-control" [(ngModel)]="contact.firstName">
+      <input [readonly]="!contactEditFlag" formControlName="firstName" class="form-control">
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.firstName.hasError('required')">This
+        field is required
+      </div>
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.firstName.hasError('whitespace')">Some
+        characters are wrong
+      </div>
+
     </div>
 
     <div class="col-md-3 col-sm-3 col-6 form-group">
       <label>Last Name</label>
-      <input [readonly]="!contactEditFlag" name="lastName" class="form-control" [(ngModel)]="contact.lastName">
+      <input [readonly]="!contactEditFlag" formControlName="lastName" class="form-control">
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.lastName.hasError('required')">This
+        field is required
+      </div>
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.lastName.hasError('whitespace')">Some
+        characters are wrong
+      </div>
 
     </div>
+    <div class="col-md-3 col-sm-3 col-6 form-group">
+      <label>Age</label>
+      <input [readonly]="!contactEditFlag" formControlName="age" class="form-control">
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.age.hasError('required')">This field is
+        required
+      </div>
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.age.hasError('whitespace')">Some
+        characters are wrong
+      </div>
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.age.hasError('max')">max 120!</div>
+      <div class="alert alert-danger error-message" *ngIf="contactForm.controls.age.hasError('min')">min 1!</div>
+    </div>
+
     <div class="col-sm-1 col-md-1 edit-picture" *ngIf="!contactEditFlag">
       <img (click)="toggleEditContact()" [src]="imageEdit" alt="edit">
     </div>
     <div class="col-sm-1 col-md-1 edit-picture" *ngIf="contactEditFlag">
-      <img (click)="updateContact()" [src]="imageSave" alt="save">
+      <button [ngClass]="{'low-opacity': contactForm.invalid}" [disabled]="contactForm.invalid" class="submit"
+              type="submit">
+        <img [src]="imageSave" alt="save">
+      </button>
     </div>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
   </form>
 </div>

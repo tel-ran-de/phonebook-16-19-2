@@ -32,7 +32,7 @@
   <button [disabled]="contactForm.invalid" type="submit">
     save
   </button>
-  <button type="reset">clear</button>
+  <div class="button" (click)="clear()">clear</div>
   <div class="errors" *ngIf="logError">
     Error: {{logError}}
   </div>
