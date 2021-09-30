@@ -27,12 +27,13 @@ export class PhoneComponent implements OnInit, OnDestroy {
   getPhones(): void {
     this.getAllPhoneErrorMessage = undefined;
     const contactId: number = Number(this.route.snapshot.paramMap.get('id'));
-    const getPhonesSubscription = this.phoneService.getPhones(contactId).subscribe(value => this.phones = value, error => this.callBackError(error));
+    const getPhonesSubscription = this.phoneService.getPhones(contactId)
+        .subscribe(value => this.phones = value, error => this.callBackError(error));
     this.subscriptions.push(getPhonesSubscription);
   }
 
   private callBackError(error: HttpErrorResponse): void {
-    this.getAllPhoneErrorMessage = "Error" + error;
+    this.getAllPhoneErrorMessage = error.error.errorMsg;
   }
 
 
