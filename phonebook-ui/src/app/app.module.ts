@@ -12,43 +12,42 @@ import {PhoneComponent} from './contact-details/phone/phone.component';
 import {EmailComponent} from './contact-details/email/email.component';
 import {AddressComponent} from './contact-details/address/address.component';
 import {ContactComponent} from './contact-details/contact/contact.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ContactsComponent} from './contacts/contacts.component';
 import {AddPhoneFormComponent} from './add-phone-form/add-phone-form.component';
 import {PhoneElementComponent} from './contact-details/phone/phone-element/phone-element.component';
 import {SortPhonesByFavoritePipe} from './contact-details/sort-by-favorite-phone.pipe';
-import {EmailElementComponent} from './contact-details/email/emeail-element/email-element.component';
-import {ContactsComponent} from './contacts/contacts.component';
 import {ContactSearch} from "./contacts/contact.search";
 import {EditAddressComponent} from './contact-details/address/edit-address/edit-address.component';
+import {EmailElementComponent} from "./contact-details/email/email-element/email-element.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-    AddContactFormComponent,
-    PageNotFoundComponent,
-    ContactDetailsComponent,
-    PhoneComponent,
-    EmailComponent,
-    AddressComponent,
-    ContactComponent,
-    AddPhoneFormComponent,
-    PhoneElementComponent,
-    SortPhonesByFavoritePipe,
-    ContactsComponent,
-    EmailElementComponent,
-    ContactSearch,
-    EditAddressComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        NavigationComponent,
+        AddContactFormComponent,
+        PageNotFoundComponent,
+        ContactDetailsComponent,
+        PhoneComponent,
+        EmailComponent,
+        AddressComponent,
+        ContactComponent,
+        ContactsComponent,
+        EmailElementComponent,
+        ContactSearch,
+        EditAddressComponent,
+        AddPhoneFormComponent,
+        PhoneElementComponent,
+        SortPhonesByFavoritePipe,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 
 })
 export class AppModule {

@@ -12,6 +12,6 @@ public class EmailMapper {
      }
 
     public FullEmailResponse emailToFullEmailResponse (Email email) {
-        return new FullEmailResponse(email.getId(), email.getEmail());
+        return new FullEmailResponse(email.getId(), email.getEmail(), email.isFavorite());
     }
 }

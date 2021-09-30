@@ -23,4 +23,20 @@ export class EmailService {
     const url = `${this.emailUrl}/${contactId}/all`;
     return this.httpClient.get<Email[]>(url);
   }
+
+  updateEmail(email: Email): Observable<Email> {
+    const url = `${this.emailUrl}/${email.id}`
+    return this.httpClient.put<Email>(url, email, this.httpOptions);
+  }
+
+  addEmail(email: Email): Observable<Email> {
+    return this.httpClient.post<Email>(this.emailUrl, email, this.httpOptions);
+  }
+
+  deleteEmail(emailId: number): Observable<void> {
+    const url = `${this.emailUrl}/${emailId}`;
+    return this.httpClient.delete<void>(url, this.httpOptions);
+  }
+
+
 }

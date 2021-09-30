@@ -3,20 +3,23 @@ import {Contact} from "../../model/contact";
 import {ActivatedRoute} from "@angular/router";
 import {ContactService} from "../../service/contact.service";
 import {Subscription} from "rxjs";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Validator} from "../../shared/validator";
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['../contact-details.component.css']
+  styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit, OnDestroy {
   public contactEditFlag = false;
   public contact: Contact | undefined;
-  public contactToDisplay: Contact | undefined;
   public imageSave = "assets/images/save.png";
   public imageEdit = "assets/images/edit.png";
   private subscriptions: Subscription[] = [];
   public errorMessage: undefined | string;
+
+  contactForm: FormGroup = new FormGroup({});
 
   constructor(
     private route: ActivatedRoute,
@@ -27,12 +30,23 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.getContact());
   }
 
+  createForm() {
+    this.contactForm = new FormGroup({
+      id: new FormControl(this.contact?.id),
+      firstName: new FormControl(this.contact?.firstName, [Validators.required, Validator.noWhitespaceValidator]),
+      lastName: new FormControl(this.contact?.lastName, [Validators.required, Validator.noWhitespaceValidator]),
+      age: new FormControl(this.contact?.age, [Validators.required, Validator.noWhitespaceValidator, Validators.max(120), Validators.min(1)]),
+      isFavorite: new FormControl(this.contact?.isFavorite),
+      group: new FormControl(this.contact?.group)
+    })
+  }
+
   getContact(): Subscription {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     return this.contactService.getContact(id)
       .subscribe(contact => {
-        this.contact = Object.assign({}, contact);
-        this.contactToDisplay = Object.assign({}, contact);
+        this.contact = contact;
+        this.createForm();
       });
   }
 
@@ -42,15 +56,12 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   updateContact() {
     this.errorMessage = '';
-    if (this.contactToDisplay) {
-      this.subscriptions.push(this.contactService.updateContact(this.contactToDisplay)
-        .subscribe(_ => {
+    this.subscriptions.push(this.contactService.updateContact(this.contactForm.value)
+      .subscribe(_ => {
           this.contactEditFlag = !this.contactEditFlag;
-          this.contact = Object.assign({}, this.contactToDisplay);
         },
-         _ => this.errorMessage = "Error saving contact into Database. Please, try again later."
+        _ => this.errorMessage = "Error saving contact into Database. Please, try again later."
       ));
-    }
   }
 
   ngOnDestroy(): void {
