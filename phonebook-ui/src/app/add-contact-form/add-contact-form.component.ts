@@ -28,7 +28,7 @@ export class AddContactFormComponent implements OnInit, OnDestroy {
       lastName: new FormControl('', Validators.required),
       age: new FormControl(1, [Validators.required, Validators.min(1), Validators.max(120)]),
       favorite: new FormControl(false),
-      group: new FormControl('NONE')
+      group: new FormControl('NONE', Validators.required)
     });
   }
 
@@ -36,6 +36,11 @@ export class AddContactFormComponent implements OnInit, OnDestroy {
     const addSubscription = this.contactService.addContact(this.contactForm.value)
       .subscribe(value => this.router.navigate(['contacts', value.id]), error => this.logError = error);
     this.subscription.push(addSubscription);
+  }
+
+  clear(): void {
+    this.contactForm.reset();
+    this.logError = undefined;
   }
 
   ngOnDestroy(): void {
