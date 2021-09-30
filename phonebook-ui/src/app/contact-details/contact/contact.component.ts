@@ -36,7 +36,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       firstName: new FormControl(this.contact?.firstName, [Validators.required, Validator.noWhitespaceValidator]),
       lastName: new FormControl(this.contact?.lastName, [Validators.required, Validator.noWhitespaceValidator]),
       age: new FormControl(this.contact?.age, [Validators.required, Validator.noWhitespaceValidator, Validators.max(120), Validators.min(1)]),
-      isFavorite: new FormControl(this.contact?.isFavorite),
+      favorite: new FormControl(this.contact?.favorite),
       group: new FormControl(this.contact?.group)
     })
   }

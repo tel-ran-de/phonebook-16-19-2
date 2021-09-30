@@ -3,6 +3,6 @@ export interface Contact {
   firstName: string;
   lastName: string;
   age: number;
-  isFavorite: boolean;
+  favorite: boolean;
   group: string;
 }
