@@ -28,8 +28,8 @@ export class AddPhoneFormComponent implements OnInit, OnDestroy {
 
   private _initFrom(): void {
     this.phoneForm = new FormGroup({
-      countryCode: new FormControl('', Validators.required),
-      telephoneNumber: new FormControl('', Validators.required),
+      countryCode: new FormControl('', [Validators.required,Validators.pattern("^[+\\d]+$")]),
+      telephoneNumber: new FormControl('', [Validators.required,Validators.pattern("^[0-9]+$")]),
       favorite: new FormControl(false),
       contactId: new FormControl(this.contactId),
       id: new FormControl()
