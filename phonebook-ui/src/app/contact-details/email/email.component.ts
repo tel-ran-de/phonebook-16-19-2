@@ -12,12 +12,19 @@ import {Subscription} from "rxjs";
 })
 export class EmailComponent implements OnInit, OnDestroy {
 
-  emails: Email[] | undefined;
+  emails: Email[] = [];
   private subscriptions: Subscription[] = [];
 
   getAllEmailErrorMessage: string | undefined;
+  public contactId!: number;
+  public addNewEmail = false;
 
-  constructor(private emailService: EmailService, private route: ActivatedRoute) {
+
+  constructor(
+    private emailService: EmailService,
+    private route: ActivatedRoute) {
+
+    this.contactId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {
@@ -40,5 +47,31 @@ export class EmailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions
       .forEach(subscriptions => subscriptions.unsubscribe());
+  }
+
+  addEmail() {
+    this.addNewEmail = true;
+  }
+
+  updateEmail(email: Email) {
+    if (email.id != null) {
+      this.subscriptions.push(this.emailService.updateEmail(email).subscribe())
+    } else {
+      email.contactId = this.contactId;
+      this.subscriptions.push(this.emailService.addEmail(email).subscribe(_ => {
+        this.addNewEmail = false;
+        this.getEmails();
+      }))
+    }
+  }
+
+  deleteEmail(email: Email) {
+    if (email.id != null) {
+      this.emailService.deleteEmail(email.id).subscribe(_ => this.getEmails());
+    }
+  }
+
+  cancelEmail() {
+    this.addNewEmail = false;
   }
 }
