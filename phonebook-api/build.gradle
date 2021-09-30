@@ -26,15 +26,14 @@ dependencies {
     compile 'io.springfox:springfox-swagger-ui:3.0.0'
     compile 'io.springfox:springfox-bean-validators:3.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.20'
+    compile "org.flywaydb:flyway-core:6.5.0"
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
     runtimeOnly 'org.postgresql:postgresql:42.2.23.jre7'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
     testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
     testCompileOnly 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.4'
 
 }
 
