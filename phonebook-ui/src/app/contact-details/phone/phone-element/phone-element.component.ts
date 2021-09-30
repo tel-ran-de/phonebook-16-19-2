@@ -33,8 +33,8 @@ export class PhoneElementComponent implements OnInit, OnDestroy {
 
   private _initFrom() {
     this.updatePhoneForm = new FormGroup({
-      countryCode: new FormControl(this.phone?.countryCode, Validators.required),
-      telephoneNumber: new FormControl(this.phone?.telephoneNumber, Validators.required),
+      countryCode: new FormControl(this.phone?.countryCode, [Validators.required,Validators.pattern("^[+\\d]+$")]),
+      telephoneNumber: new FormControl(this.phone?.telephoneNumber, [Validators.required,Validators.pattern("^[0-9]+$")]),
       favorite: new FormControl(this.phone?.favorite),
       contactId: new FormControl(this.contactId),
       id: new FormControl(this.phone?.id)
