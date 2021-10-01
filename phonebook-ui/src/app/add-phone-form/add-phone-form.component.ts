@@ -4,6 +4,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PhoneService} from "../service/phone.service";
 import {ActivatedRoute} from "@angular/router";
 import {Phone} from "../model/phone";
+import {HttpErrorResponse} from "@angular/common/http";
+import {convertHttpResponseToErrorMessage} from "../shared/httpErrorHandler";
 
 @Component({
   selector: 'app-add-phone-form',
@@ -13,7 +15,7 @@ import {Phone} from "../model/phone";
 export class AddPhoneFormComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   phoneForm!: FormGroup;
-  logError: String | undefined;
+  errorMessage: String | undefined;
   contactId: number | undefined;
   @Output()
   addPhone: EventEmitter<Phone> = new EventEmitter<Phone>();
@@ -28,8 +30,8 @@ export class AddPhoneFormComponent implements OnInit, OnDestroy {
 
   private _initFrom(): void {
     this.phoneForm = new FormGroup({
-      countryCode: new FormControl('', Validators.required),
-      telephoneNumber: new FormControl('', Validators.required),
+      countryCode: new FormControl('', [Validators.required,Validators.pattern("^[+\\d]+$")]),
+      telephoneNumber: new FormControl('', [Validators.required,Validators.pattern("^[0-9]+$")]),
       favorite: new FormControl(false),
       contactId: new FormControl(this.contactId),
       id: new FormControl()
@@ -38,18 +40,22 @@ export class AddPhoneFormComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.phoneForm.invalid) {
-      this.logError = "The phone form is invalid";
+      this.errorMessage = "The phone form is invalid";
       return;
     }
     const addSubscription = this.phoneService.addPhone(this.phoneForm.value)
       .subscribe(value => this.addPhone.emit(value),
-        error => this.logError = error);
+        error => this.handleHttpError = error);
     this.subscription.push(addSubscription);
   }
 
   clear(): void {
     this.phoneForm.reset();
-    this.logError = undefined;
+    this.errorMessage = undefined;
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.errorMessage = convertHttpResponseToErrorMessage(error);
   }
 
   ngOnDestroy(): void {

@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {ContactService} from "../service/contact.service";
 import {Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {HttpErrorResponse} from "@angular/common/http";
+import {convertHttpResponseToErrorMessage} from "../shared/httpErrorHandler";
 
 @Component({
   selector: 'app-add-contact-form',
@@ -12,7 +14,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class AddContactFormComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   contactForm!: FormGroup;
-  logError: String | undefined;
+  errorMessage: String | undefined;
 
   constructor(private contactService: ContactService, private router: Router) {
 
@@ -34,16 +36,19 @@ export class AddContactFormComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     const addSubscription = this.contactService.addContact(this.contactForm.value)
-      .subscribe(value => this.router.navigate(['contacts', value.id]), error => this.logError = error);
+      .subscribe(value => this.router.navigate(['contacts', value.id]), error => this.handleHttpError = error);
     this.subscription.push(addSubscription);
   }
 
   clear(): void {
     this.contactForm.reset();
-    this.logError = undefined;
+    this.errorMessage = undefined;
   }
 
   ngOnDestroy(): void {
     this.subscription.forEach(value => value.unsubscribe());
+  }
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.errorMessage = convertHttpResponseToErrorMessage(error);
   }
 }

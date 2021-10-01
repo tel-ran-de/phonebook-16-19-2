@@ -14,7 +14,7 @@
           <div class="alert alert-danger error-message" *ngIf="addressForm.controls.city.hasError('required') && (addressForm.controls.city.dirty || addressForm.controls.city.touched)">This field is required</div>
           <div class="alert alert-danger error-message" *ngIf="addressForm.controls.city.hasError('whitespace')">Some characters are wrong</div>
         </div>
-        <div class="col-md-4  form-group street-home">
+        <div class="col-md-3  form-group street-home">
           <input [readonly]="!addressEditFlag" placeholder="street" class="form-control" formControlName="street">
           <div class="alert alert-danger error-message" *ngIf="addressForm.controls.street.hasError('required') && (addressForm.controls.street.dirty || addressForm.controls.street.touched)">This field is required</div>
           <div class="alert alert-danger error-message" *ngIf="addressForm.controls.street.hasError('whitespace')">Some characters are wrong</div>

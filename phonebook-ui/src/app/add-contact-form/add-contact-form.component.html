@@ -33,7 +33,7 @@
     save
   </button>
   <div class="button" (click)="clear()">clear</div>
-  <div class="errors" *ngIf="logError">
-    Error: {{logError}}
+  <div class="errors" *ngIf="errorMessage">
+    Error: {{errorMessage}}
   </div>
 </form>
