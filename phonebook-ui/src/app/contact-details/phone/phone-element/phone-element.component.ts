@@ -4,6 +4,8 @@ import {Subscription} from "rxjs";
 import {PhoneService} from "../../../service/phone.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {HttpErrorResponse} from "@angular/common/http";
+import {convertHttpResponseToErrorMessage} from "../../../shared/httpErrorHandler";
 
 @Component({
   selector: 'app-phone-element',
@@ -15,7 +17,7 @@ export class PhoneElementComponent implements OnInit, OnDestroy {
   phoneEditFlag = false;
   contactId: number | undefined;
   updatePhoneForm!: FormGroup;
-  logError: String | undefined;
+  errorMessage: String | undefined;
   @Input()
   phone: Phone | undefined;
   @Output()
@@ -43,27 +45,34 @@ export class PhoneElementComponent implements OnInit, OnDestroy {
 
   onClickSave() {
     if (this.updatePhoneForm.invalid) {
-      this.logError = "The phone form is invalid";
+      this.errorMessage = "The phone form is invalid";
       return;
     }
     if (this.phone === this.updatePhoneForm.value) {
-      this.logError = undefined;
+      this.errorMessage = undefined;
       return;
     }
-    const addSubscription = this.phoneService.updatePhone(this.updatePhoneForm.value)
-      .subscribe(_ => this.updatePhone.emit(this.updatePhoneForm.value), error => this.logError = error);
-    this.subscriptions.push(addSubscription);
+    const updateSubscription = this.phoneService.updatePhone(this.updatePhoneForm.value)
+      .subscribe(
+        _ => this.updatePhone.emit(this.updatePhoneForm.value),
+        error => this.handleHttpError(error)
+      );
+    this.subscriptions.push(updateSubscription);
     this.phoneEditFlag = false;
   }
 
   onClickDelete(phone: Phone): void {
     const addSubscription = this.phoneService.deletePhone(phone.id).subscribe(_ =>
-      this.deletePhone.emit(this.phone), error => this.logError = error);
+      this.deletePhone.emit(this.phone), error => this.handleHttpError(error));
     this.subscriptions.push(addSubscription);
   }
 
   ngOnDestroy(): void {
     this.subscriptions
       .forEach(subscriptions => subscriptions.unsubscribe());
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.errorMessage = convertHttpResponseToErrorMessage(error);
   }
 }
