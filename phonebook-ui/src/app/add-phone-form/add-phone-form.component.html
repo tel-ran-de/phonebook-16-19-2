@@ -14,8 +14,8 @@ Add new Phone:
     <img (click)="clear()" class="delete-line pointer" src="assets/images/delete.png"
          alt="delete">
   </div>
-  <div class="errors" *ngIf="logError">
-    Error: {{logError}}
+  <div class="errors" *ngIf="errorMessage">
+    Error: {{errorMessage}}
   </div>
 </form>
 <div class="validation-message">
