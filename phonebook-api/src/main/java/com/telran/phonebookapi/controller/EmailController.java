@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,7 +35,7 @@ public class EmailController {
     }
 
     @GetMapping("/{id}/all")
-    public Iterable<FullEmailResponse> getAllEmails(@PathVariable Long id) {
+    public Iterable<FullEmailResponse> getAllEmails(@Valid @PathVariable Long id) {
         return emailService.getAll(id)
                 .stream()
                 .map(emailMapper::emailToFullEmailResponse)
@@ -44,18 +43,18 @@ public class EmailController {
     }
 
     @GetMapping("/{id}")
-    public FullEmailResponse getEmailById(@PathVariable Long id) {
+    public FullEmailResponse getEmailById(@Valid @PathVariable Long id) {
         Email email = emailService.get(id);
         return emailMapper.emailToFullEmailResponse(email);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEmail(@PathVariable Long id) {
+    public void deleteEmail(@Valid @PathVariable Long id) {
         emailService.remove(id);
     }
 
     @PutMapping("/{id}")
-    public void updateEmail(@PathVariable Long id, @RequestBody CreateEmailRequest createEmailRequest) {
+    public void updateEmail(@Valid @PathVariable Long id, @RequestBody CreateEmailRequest createEmailRequest) {
         emailService.edit(id, createEmailRequest.getEmail(), createEmailRequest.isFavorite());
     }
 }

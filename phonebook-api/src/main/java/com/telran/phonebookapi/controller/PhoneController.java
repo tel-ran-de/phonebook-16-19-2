@@ -44,18 +44,18 @@ public class PhoneController {
     }
 
     @GetMapping("/{id}")
-    public CreatePhoneResponse getPhoneById(@PathVariable Long id) {
+    public CreatePhoneResponse getPhoneById(@Valid @PathVariable Long id) {
         Phone phone = phoneService.get(id);
         return phoneMapper.phoneToRegisterPhoneResponse(phone);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePhone(@PathVariable Long id) {
+    public void deletePhone(@Valid @PathVariable Long id) {
         phoneService.remove(id);
     }
 
     @PutMapping("/{id}")
-    public void updatePhone(@PathVariable Long id, @Valid @RequestBody CreatePhoneRequest createPhoneRequest) {
+    public void updatePhone(@Valid @PathVariable Long id, @Valid @RequestBody CreatePhoneRequest createPhoneRequest) {
         phoneService.edit(
                 id,
                 createPhoneRequest.getCountryCode(),
