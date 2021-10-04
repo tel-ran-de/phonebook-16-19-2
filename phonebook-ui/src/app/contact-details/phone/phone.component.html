@@ -13,10 +13,10 @@
                          (deletePhone)="deletePhone($event)"></app-phone-element>
     </ul>
   </ng-template>
-  <ng-template [ngIf]="getAllPhoneErrorMessage">
-    <div class="alert alert-danger">{{getAllPhoneErrorMessage}}</div>
+  <ng-template [ngIf]="errorMessage">
+    <div class="alert alert-danger">{{errorMessage}}</div>
   </ng-template>
-  <ng-template [ngIf]="!phones && !getAllPhoneErrorMessage">
+  <ng-template [ngIf]="!phones && !errorMessage">
     <p>Loading...</p>
   </ng-template>
 </div>

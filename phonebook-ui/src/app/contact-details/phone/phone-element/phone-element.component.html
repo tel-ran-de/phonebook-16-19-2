@@ -19,9 +19,10 @@
 
   </form>
   <div class="validation-message">
-    <div class="alert alert-danger" *ngIf="logError">
-      Error: {{logError}}
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      Error: {{errorMessage}}
     </div>
+
     <div class="alert alert-danger" *ngIf=" updatePhoneForm.controls['countryCode'].invalid &&
             updatePhoneForm.controls['countryCode'].touched  ">
       country code not specified
