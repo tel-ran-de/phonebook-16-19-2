@@ -4,6 +4,7 @@ import {EmailService} from "../../service/email.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
+import {convertHttpResponseToErrorMessage} from "../../shared/httpErrorHandler";
 
 @Component({
   selector: 'app-email',
@@ -15,7 +16,7 @@ export class EmailComponent implements OnInit, OnDestroy {
   emails: Email[] = [];
   private subscriptions: Subscription[] = [];
 
-  getAllEmailErrorMessage: string | undefined;
+  errorMessage: string | undefined;
   public contactId!: number;
   public addNewEmail = false;
 
@@ -32,16 +33,12 @@ export class EmailComponent implements OnInit, OnDestroy {
   }
 
   private getEmails(): void {
-    this.getAllEmailErrorMessage = undefined;
+    this.errorMessage = undefined;
     const contactId: number = Number(this.route.snapshot.paramMap.get('id'));
 
     const getEmailsSubscription = this.emailService.getEmails(contactId)
-      .subscribe(value => this.emails = value, error => this.callBackError(error));
+      .subscribe(value => this.emails = value, error => this.handleHttpError(error));
     this.subscriptions.push(getEmailsSubscription);
-  }
-
-  private callBackError(error: HttpErrorResponse): void {
-    this.getAllEmailErrorMessage = "Error";
   }
 
   ngOnDestroy(): void {
@@ -58,20 +55,28 @@ export class EmailComponent implements OnInit, OnDestroy {
       this.subscriptions.push(this.emailService.updateEmail(email).subscribe())
     } else {
       email.contactId = this.contactId;
-      this.subscriptions.push(this.emailService.addEmail(email).subscribe(_ => {
-        this.addNewEmail = false;
-        this.getEmails();
-      }))
+      this.subscriptions.push(this.emailService.addEmail(email).subscribe(
+        _ => {
+          this.addNewEmail = false;
+          this.getEmails();
+        },
+        error => this.handleHttpError(error)))
     }
   }
 
   deleteEmail(email: Email) {
     if (email.id != null) {
-      this.emailService.deleteEmail(email.id).subscribe(_ => this.getEmails());
+      this.emailService.deleteEmail(email.id).subscribe(
+        _ => this.getEmails(),
+        error => this.handleHttpError(error));
     }
   }
 
   cancelEmail() {
     this.addNewEmail = false;
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.errorMessage = convertHttpResponseToErrorMessage(error);
   }
 }

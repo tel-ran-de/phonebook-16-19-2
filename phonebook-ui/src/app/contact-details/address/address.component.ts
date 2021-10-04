@@ -3,6 +3,8 @@ import {Address} from "../../model/address";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {AddressService} from "../../service/address.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {convertHttpResponseToErrorMessage} from "../../shared/httpErrorHandler";
 
 @Component({
   selector: 'app-address',
@@ -15,6 +17,7 @@ export class AddressComponent implements OnInit {
   public addingNewAddress = false;
 
   public addresses: Address[] = [];
+  public errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,37 +32,49 @@ export class AddressComponent implements OnInit {
 
   getAddresses() {
     const getAddressesSubscription = this.addressService.getAddresses(this.contactId)
-      .subscribe(addresses => this.addresses = addresses);
+      .subscribe(addresses => this.addresses = addresses, error => this.handleHttpError(error));
     this.subscriptions.push(getAddressesSubscription);
   }
 
   onAddressChange(address: Address) {
-    if(address.id != null) {
+    if (address.id != null) {
       this.subscriptions.push(this.addressService.updateAddress(address)
-        .subscribe())
+        .subscribe(_ => {
+        }, error => this.handleHttpError(error)))
     } else {
       address.contactId = this.contactId;
       this.subscriptions.push(this.addressService.addAddress(address)
         .subscribe(_ => {
-          this.addingNewAddress = false;
-          this.getAddresses();
-        }));
+            this.addingNewAddress = false;
+            this.getAddresses();
+          },
+          error => this.handleHttpError(error)
+        ));
     }
   }
+
   addNewAddress() {
     this.addingNewAddress = true;
   }
 
   deleteAddress(address: Address) {
     if (address.id != null) {
-      this.addressService.deleteAddress(address.id).subscribe(_ => this.getAddresses());
+      this.addressService.deleteAddress(address.id).subscribe(
+        _ => this.getAddresses(),
+        error => this.handleHttpError(error)
+      );
     }
   }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(value => value.unsubscribe())
   }
 
   cancelAddingNewAddress() {
     this.addingNewAddress = false;
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.errorMessage = convertHttpResponseToErrorMessage(error);
   }
 }

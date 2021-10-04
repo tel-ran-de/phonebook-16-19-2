@@ -5,6 +5,8 @@ import {ContactService} from "../../service/contact.service";
 import {Subscription} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Validator} from "../../shared/validator";
+import {HttpErrorResponse} from "@angular/common/http";
+import {convertHttpResponseToErrorMessage} from "../../shared/httpErrorHandler";
 
 @Component({
   selector: 'app-contact',
@@ -36,7 +38,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       firstName: new FormControl(this.contact?.firstName, [Validators.required, Validator.noWhitespaceValidator]),
       lastName: new FormControl(this.contact?.lastName, [Validators.required, Validator.noWhitespaceValidator]),
       age: new FormControl(this.contact?.age, [Validators.required, Validator.noWhitespaceValidator, Validators.max(120), Validators.min(1)]),
-      isFavorite: new FormControl(this.contact?.isFavorite),
+      favorite: new FormControl(this.contact?.favorite),
       group: new FormControl(this.contact?.group)
     })
   }
@@ -45,9 +47,10 @@ export class ContactComponent implements OnInit, OnDestroy {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     return this.contactService.getContact(id)
       .subscribe(contact => {
-        this.contact = contact;
-        this.createForm();
-      });
+          this.contact = contact;
+          this.createForm();
+        },
+        error => this.handleHttpError(error));
   }
 
   toggleEditContact() {
@@ -55,16 +58,19 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   updateContact() {
-    this.errorMessage = '';
     this.subscriptions.push(this.contactService.updateContact(this.contactForm.value)
       .subscribe(_ => {
           this.contactEditFlag = !this.contactEditFlag;
         },
-        _ => this.errorMessage = "Error saving contact into Database. Please, try again later."
+        error => this.handleHttpError(error)
       ));
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe())
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.errorMessage = convertHttpResponseToErrorMessage(error);
   }
 }

@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {PhoneService} from "../../service/phone.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {convertHttpResponseToErrorMessage} from "../../shared/httpErrorHandler";
 
 @Component({
   selector: 'app-phone',
@@ -13,7 +14,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class PhoneComponent implements OnInit, OnDestroy {
   public phones: Phone[] = [];
   private subscriptions: Subscription[] = [];
-  getAllPhoneErrorMessage: string | undefined;
+  errorMessage: string | undefined;
   phoneAddFlag = false;
   addPhoneForm: boolean = false;
 
@@ -25,14 +26,16 @@ export class PhoneComponent implements OnInit, OnDestroy {
   }
 
   getPhones(): void {
-    this.getAllPhoneErrorMessage = undefined;
+    this.errorMessage = undefined;
     const contactId: number = Number(this.route.snapshot.paramMap.get('id'));
-    const getPhonesSubscription = this.phoneService.getPhones(contactId).subscribe(value => this.phones = value, error => this.callBackError(error));
+    const getPhonesSubscription = this.phoneService.getPhones(contactId).subscribe(
+      value => this.phones = value,
+      error => this.handleHttpError(error));
     this.subscriptions.push(getPhonesSubscription);
   }
 
-  private callBackError(error: HttpErrorResponse): void {
-    this.getAllPhoneErrorMessage = "Error" + error;
+  private handleHttpError(error: HttpErrorResponse): void {
+    this.errorMessage = convertHttpResponseToErrorMessage(error);
   }
 
 
