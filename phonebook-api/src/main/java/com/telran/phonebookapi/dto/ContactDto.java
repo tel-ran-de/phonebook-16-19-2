@@ -10,12 +10,12 @@ public class ContactDto {
     public boolean isFavorite;
     public String group;
 
-    public ContactDto(Long id, String firstName, String lastName, int age, boolean favorite, Group group) {
+    public ContactDto(Long id, String firstName, String lastName, int age, boolean isFavorite, Group group) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.isFavorite = favorite;
+        this.isFavorite = isFavorite;
         this.group = group.toString();
     }
 }

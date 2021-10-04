@@ -7,6 +7,7 @@ import com.telran.phonebookapi.mapper.ContactMapper;
 import com.telran.phonebookapi.service.ContactService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,13 +24,13 @@ public class ContactController {
 
 
     @PostMapping("")
-    public ContactDto add(@RequestBody ContactDto contactDto) {
+    public ContactDto add(@Valid @RequestBody ContactDto contactDto) {
         Contact contact = contactService.add(contactDto.firstName, contactDto.lastName, contactDto.age, contactDto.isFavorite, Group.valueOf(contactDto.group));
         return contactMapper.toDto(contact);
     }
 
     @PutMapping("/{id}")
-    public void edit(@RequestBody ContactDto contactDto, @PathVariable Long id) {
+    public void edit(@Valid @RequestBody ContactDto contactDto, @PathVariable Long id) {
         contactService.editContact(id, contactDto.firstName, contactDto.lastName, contactDto.age, contactDto.isFavorite, Group.valueOf(contactDto.group));
     }
 
@@ -40,12 +41,12 @@ public class ContactController {
     }
 
     @GetMapping("/{id}")
-    public ContactDto getById(@PathVariable Long id) {
+    public ContactDto getById(@Valid @PathVariable Long id) {
         return contactMapper.toDto(contactService.get(id));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@Valid @PathVariable Long id) {
         contactService.remove(id);
     }
 }
